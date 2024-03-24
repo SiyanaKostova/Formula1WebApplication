@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Formula1WebApplication.Infrastructure\Formula1WebApplication.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
