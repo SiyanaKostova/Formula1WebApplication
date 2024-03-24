@@ -1,4 +1,4 @@
-﻿using Formula1WebApplication.Data;
+﻿using Formula1WebApplication.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
