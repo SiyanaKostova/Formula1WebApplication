@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Formula1WebApplication.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class FormulaOneDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public FormulaOneDbContext(DbContextOptions<FormulaOneDbContext> options)
             : base(options)
         {
         }

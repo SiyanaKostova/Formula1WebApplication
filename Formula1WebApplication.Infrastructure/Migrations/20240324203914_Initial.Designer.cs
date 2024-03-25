@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Formula1WebApplication.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(FormulaOneDbContext))]
     [Migration("20240324203914_Initial")]
     partial class Initial
     {
