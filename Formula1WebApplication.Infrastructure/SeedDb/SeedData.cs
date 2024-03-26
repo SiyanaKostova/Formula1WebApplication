@@ -28,12 +28,16 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
         public Pilot PierreGasly { get; set; }
         public Pilot ValtteriBottas { get; set; }
         public Pilot LoganSargeant { get; set; }
+        public Race BahrainGrandPrix { get; set; }
+        public Race SaudiArabiaGrandPrix { get; set; }
+        public Race AustraliaGrandPrix { get; set; }
 
         public SeedData()
         {
             SeedUsers();
             SeedOrganizer();
             SeedPilots();
+            SeedRaces();
         }
 
         private void SeedUsers()
@@ -275,6 +279,45 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 TeamName = "Williams",
                 Biography = "Logan Sargeant became F1’s first American driver in almost eight years, giving the country a home favourite to cheer once more. Winner in karting, championship glory eluded Sargeant after he made the transition to single-seater racing, but pole positions and race victories in almost every category he contested underlined his raw speed and potential.",
                 ImagePath = "\\wwwroot\\images\\pilots\\logansargeant.png"
+            };
+        }
+
+        private void SeedRaces()
+        {
+            BahrainGrandPrix = new Race
+            {
+                Name = "Bahrain Grand Prix",
+                Location = "Bahrain International Circuit",
+                Date = new DateTime(2024, 3, 2), 
+                ImageUrl = "images/races/bahrain-grand-prix.png",
+                Laps = 57,
+                CircuitInfo = "Built for the Bahrain International Circuit in December 2002. It has a blank, sandy canvas to work with, and with that fashioned the technical, 5.4km track designed by Hermann Tilke.",
+                OrganizerId = Organizer.Id,
+                UserId = GuestUser.Id
+            };
+
+            SaudiArabiaGrandPrix = new Race
+            {
+                Name = "Saudi Arabia Grand Prix",
+                Location = "Jeddah Corniche Circuit",
+                Date = new DateTime(2024, 3, 9), 
+                ImageUrl = "images/races/saudi-arabia-grand-prix.png",
+                Laps = 50,
+                CircuitInfo = "The Jeddah Corniche Circuit is a temporary street circuit, located on the Corniche – a 30km coastal resort area of the ancient Saudi Arabian city of Jeddah.",
+                OrganizerId = Organizer.Id,
+                UserId = GuestUser.Id
+            };
+
+            AustraliaGrandPrix = new Race
+            {
+                Name = "Australia Grand Prix",
+                Location = "Melbourne Grand Prix Circuit",
+                Date = new DateTime(2024, 3, 24), 
+                ImageUrl = "images/races/australia-grand-prix.png",
+                Laps = 58,
+                CircuitInfo = "The deal to host Formula 1 in Melbourne was done in 1993, using a mixture of the existing roads around the city’s Albert Park – mainly Aughtie Drive and Lakeside Drive.",
+                OrganizerId = Organizer.Id,
+                UserId = GuestUser.Id
             };
         }
     }
