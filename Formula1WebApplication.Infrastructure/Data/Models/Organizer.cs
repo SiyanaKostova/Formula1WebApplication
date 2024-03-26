@@ -23,5 +23,11 @@ namespace Formula1WebApplication.Infrastructure.Data.Models
 
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
+
+        public List<Race> Races { get; set; } = new List<Race>();
+
+        public List<Event> Events { get; set; } = new List<Event>();
+
+        public List<NewsArticle> NewsArticles { get; set; } = new List<NewsArticle>();
     }
 }
