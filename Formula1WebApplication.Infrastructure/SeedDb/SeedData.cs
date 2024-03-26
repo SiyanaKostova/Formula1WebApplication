@@ -39,6 +39,10 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
         public Event AutographSession { get; set; }
         public Event ExclusivePreview { get; set; }
 
+        public NewsArticle TheStrategist { get; set; }
+        public NewsArticle NotWhereIExpectedToBe { get; set; }
+        public NewsArticle HinchsHeroes { get; set; }
+
         public SeedData()
         {
             SeedUsers();
@@ -46,6 +50,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
             SeedPilots();
             SeedRaces();
             SeedEvents();
+            SeedNewsArticles();
         }
 
         private void SeedUsers()
@@ -362,6 +367,33 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 Date = new DateTime(2024, 3, 24),
                 OrganizerId = Organizer.Id,
                 UserId = GuestUser.Id
+            };
+        }
+
+        private void SeedNewsArticles()
+        {
+            TheStrategist = new NewsArticle
+            {
+                Title = "The Strategist",
+                Description = "Norris reckons he could have beaten Leclerc in Melbourne with a better strategy – but is he right? Max Verstappen’s retirement from Australian Grand Prix in the opening laps, along with Sergio Perez’s P6 start from the grid, set up an exciting battle for the race win and resulted in a very different looking podium. Ferrari finished the race on the top two steps closely followed by Lando Norris, with all of the top three showing the speed capable of taking the fastest lap (ultimately secured by Charles Leclerc). However, was a better finish possible for Norris? Former Aston Martin Head of Strategy Bernie Collins investigates…",
+                ImageUrl = "https://cdn-1.motorsport.com/images/amp/2wBdPEq0/s1000/lando-norris-mclaren-prepares-.jpg",
+                OrganizerId = Organizer.Id
+            };
+
+            NotWhereIExpectedToBe = new NewsArticle
+            {
+                Title = "Not where I expected to be",
+                Description = "Daniel Ricciardo didn’t manage to score points on home soil in Melbourne, on a day where his team mate finished seventh and got the team’s account up and running in the constructors’. Having now been out-qualified by Yuki Tsunoda in the first three races, the Australian was in a reflective mood after coming home in 12th place. Ricciardo’s woes in Australia stretched back to qualifying when he lost his lap time in Q1 for a clear track limits infringement, which dropped him to P18 on the grid. Although there were three retirements in the race and two Virtual Safety Car periods, Ricciardo ran out of time to climb into the points.",
+                ImageUrl = "https://thejudge13.com/wp-content/uploads/2024/02/daniel-ricciardo.webp",
+                OrganizerId = Organizer.Id
+            };
+
+            HinchsHeroes = new NewsArticle
+            {
+                Title = "Hinch's heroes",
+                Description = "The Australian Grand Prix in Melbourne served up a superb victory for Carlos Sainz, with plenty of other impressive performances throughout the field. As usual, former IndyCar star and F1 TV pundit James Hinchcliffe was watching closely and has picked out the five drivers who impressed him the most across the race weekend at the Albert Park circuit… Carlos Sainz – P1 - This one is an inevitability, so let’s get it out of the way first. In what many pundits have labeled as Sainz’s greatest drive in F1, the Spaniard capitalised on a rare reliability misstep from Red Bull that eliminated Max Verstappen from contention only a handful of laps into the race.",
+                ImageUrl = "https://i.cbc.ca/1.6509174.1656870708!/fileImage/httpImage/1406549790.jpg",
+                OrganizerId = Organizer.Id
             };
         }
     }
