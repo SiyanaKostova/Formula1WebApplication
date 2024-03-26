@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Formula1WebApplication.Infrastructure.Data.SeedDb;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Formula1WebApplication.Infrastructure.Data.SeedDb
+namespace Formula1WebApplication.Infrastructure.SeedDb.Configurations
 {
     internal class UserConfiguration : IEntityTypeConfiguration<IdentityUser>
     {
