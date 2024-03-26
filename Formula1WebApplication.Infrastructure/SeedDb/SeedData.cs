@@ -7,7 +7,9 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
     {
         public IdentityUser OrganizerUser { get; set; }
         public IdentityUser GuestUser { get; set; }
+
         public Organizer Organizer { get; set; }
+
         public Pilot MaxVerstappen { get; set; }
         public Pilot CharlesLeclerc { get; set; }
         public Pilot SergioPerez { get; set; }
@@ -28,9 +30,14 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
         public Pilot PierreGasly { get; set; }
         public Pilot ValtteriBottas { get; set; }
         public Pilot LoganSargeant { get; set; }
+
         public Race BahrainGrandPrix { get; set; }
         public Race SaudiArabiaGrandPrix { get; set; }
         public Race AustraliaGrandPrix { get; set; }
+
+        public Event MeetAndGreet { get; set; }
+        public Event AutographSession { get; set; }
+        public Event ExclusivePreview { get; set; }
 
         public SeedData()
         {
@@ -38,6 +45,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
             SeedOrganizer();
             SeedPilots();
             SeedRaces();
+            SeedEvents();
         }
 
         private void SeedUsers()
@@ -289,7 +297,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 Name = "Bahrain Grand Prix",
                 Location = "Bahrain International Circuit",
                 Date = new DateTime(2024, 3, 2), 
-                ImageUrl = "images/races/bahrain-grand-prix.png",
+                ImageUrl = "https://cdn.racingnews365.com/2024/Verstappen/_1092x683_crop_center-center_85_none/SI202403020340_hires_jpeg_24bit_rgb.jpg?v=1709395733",
                 Laps = 57,
                 CircuitInfo = "Built for the Bahrain International Circuit in December 2002. It has a blank, sandy canvas to work with, and with that fashioned the technical, 5.4km track designed by Hermann Tilke.",
                 OrganizerId = Organizer.Id,
@@ -301,7 +309,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 Name = "Saudi Arabia Grand Prix",
                 Location = "Jeddah Corniche Circuit",
                 Date = new DateTime(2024, 3, 9), 
-                ImageUrl = "images/races/saudi-arabia-grand-prix.png",
+                ImageUrl = "https://cdn.racingnews365.com/2024/_1092x683_crop_center-center_85_none/Qiddiya-street-track-2.jpg?v=1709640021",
                 Laps = 50,
                 CircuitInfo = "The Jeddah Corniche Circuit is a temporary street circuit, located on the Corniche – a 30km coastal resort area of the ancient Saudi Arabian city of Jeddah.",
                 OrganizerId = Organizer.Id,
@@ -313,9 +321,45 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 Name = "Australia Grand Prix",
                 Location = "Melbourne Grand Prix Circuit",
                 Date = new DateTime(2024, 3, 24), 
-                ImageUrl = "images/races/australia-grand-prix.png",
+                ImageUrl = "https://media.formula1.com/image/upload/f_auto/q_auto/v1677245019/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Australia.jpg.transform/9col/image.jpg",
                 Laps = 58,
                 CircuitInfo = "The deal to host Formula 1 in Melbourne was done in 1993, using a mixture of the existing roads around the city’s Albert Park – mainly Aughtie Drive and Lakeside Drive.",
+                OrganizerId = Organizer.Id,
+                UserId = GuestUser.Id
+            };
+        }
+
+        private void SeedEvents()
+        {
+            MeetAndGreet = new Event
+            {
+                Name = "F1 Meet and Greet",
+                Description = "An exclusive opportunity to meet your favorite Formula 1 drivers.",
+                ImageUrl = "https://www.circuitcat.com/wp-content/uploads/2019/05/1805100318_sainz.jpg",
+                Location = "Melbourne, Australia",
+                Date = new DateTime(2024, 3, 10),
+                OrganizerId = Organizer.Id,
+                UserId = GuestUser.Id
+            };
+
+            AutographSession = new Event
+            {
+                Name = "Autograph Session",
+                Description = "Get the chance to take autographs from the top F1 pilots.",
+                ImageUrl = "https://cdn-5.motorsport.com/images/amp/0R5W8yZ6/s6/f1-british-gp-2018-max-verstappen-red-bull-racing-signs-autographs-for-fans-8649080.jpg",
+                Location = "Jeddah, Saudi Arabia",
+                Date = new DateTime(2024, 3, 17),
+                OrganizerId = Organizer.Id,
+                UserId = GuestUser.Id
+            };
+
+            ExclusivePreview = new Event
+            {
+                Name = "Exclusive Team Garage Preview",
+                Description = "A behind-the-scenes look at the teams' preparations for the race weekend.",
+                ImageUrl = "https://d3cm515ijfiu6w.cloudfront.net/wp-content/uploads/2022/06/16115532/Charles-Leclercs-car-in-the-Ferrari-garage-planetF1.jpg",
+                Location = "Sakhir, Bahrain",
+                Date = new DateTime(2024, 3, 24),
                 OrganizerId = Organizer.Id,
                 UserId = GuestUser.Id
             };
