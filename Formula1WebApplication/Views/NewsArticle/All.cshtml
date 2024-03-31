@@ -1,8 +1,65 @@
-﻿@model AllNewsArticlesQueryModel
+﻿@model PaginatedList<NewsArticleServiceModel>
 
 @{
-	ViewBag.Title = "All News Articles";
+    ViewData["Title"] = "All News Articles";
+    ViewData["TitleSortParam"] = String.IsNullOrEmpty(ViewData["CurrentSort"] as string) ? "title_desc" : "";
+    ViewData["DateSortParam"] = ViewData["CurrentSort"] as string == "Date" ? "date_desc" : "Date";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<h2 class="my-4">All News Articles</h2>
+
+<div class="row mb-3">
+    <div class="col">
+        <form asp-action="All" method="get" class="form-inline">
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control mr-2" placeholder="Search by title..." />
+            <button type="submit" class="btn btn-outline-info">Search</button>
+        </form>
+    </div>
+    <div class="col text-right">
+        <a asp-action="All" asp-route-sortOrder="@ViewData["TitleSortParam"]" class="btn btn-outline-primary mr-2">Sort by Title</a>
+        <a asp-action="All" asp-route-sortOrder="@ViewData["DateSortParam"]" class="btn btn-outline-primary">Sort by Date</a>
+    </div>
+</div>
+
+<div class="list-group">
+    @foreach (var article in Model)
+    {
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h5>@article.Title</h5>
+                <p>@article.Description</p>
+                <a asp-action="Details" asp-route-id="@article.Id" class="btn btn-primary">Details</a>
+            </div>
+            <div class="col-md-4">
+                <img src="@Url.Content(article.ImageUrl)" class="img-fluid" alt="@article.Title">
+            </div>
+        </div>
+    }
+</div>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-4">
+        <li class="page-item @(!Model.HasPreviousPage ? "disabled" : "")">
+            <a class="page-link" asp-action="All" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-searchString="@ViewData["CurrentSearch"]">Previous</a>
+        </li>
+        <li class="page-item @(!Model.HasNextPage ? "disabled" : "")">
+            <a class="page-link" asp-action="All" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-searchString="@ViewData["CurrentSearch"]">Next</a>
+        </li>
+    </ul>
+</nav>
+
+@section Styles {
+    <style>
+        .page-link {
+            color: #007bff; 
+        }
+
+        .page-item.disabled .page-link {
+            color: #6c757d; 
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+    </style>
+}
