@@ -1,9 +1,8 @@
 ﻿using Formula1WebApplication.Infrastructure.Data.Models;
-using Formula1WebApplication.Infrastructure.Data.SeedDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Formula1WebApplication.Infrastructure.SeedDb
+namespace Formula1WebApplication.Infrastructure.Data.SeedDb.Configurations
 {
     internal class PilotConfiguration : IEntityTypeConfiguration<Pilot>
     {

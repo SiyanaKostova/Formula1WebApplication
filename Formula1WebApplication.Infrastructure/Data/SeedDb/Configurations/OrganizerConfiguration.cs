@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Formula1WebApplication.Infrastructure.Data.SeedDb
+namespace Formula1WebApplication.Infrastructure.Data.SeedDb.Configurations
 {
     internal class OrganizerConfiguration : IEntityTypeConfiguration<Organizer>
     {

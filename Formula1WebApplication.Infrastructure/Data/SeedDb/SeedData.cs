@@ -301,7 +301,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
             {
                 Name = "Bahrain Grand Prix",
                 Location = "Bahrain International Circuit",
-                Date = new DateTime(2024, 3, 2), 
+                Date = new DateTime(2024, 3, 2),
                 ImageUrl = "https://cdn.racingnews365.com/2024/Verstappen/_1092x683_crop_center-center_85_none/SI202403020340_hires_jpeg_24bit_rgb.jpg?v=1709395733",
                 Laps = 57,
                 CircuitInfo = "Built for the Bahrain International Circuit in December 2002. It has a blank, sandy canvas to work with, and with that fashioned the technical, 5.4km track designed by Hermann Tilke.",
@@ -313,7 +313,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
             {
                 Name = "Saudi Arabia Grand Prix",
                 Location = "Jeddah Corniche Circuit",
-                Date = new DateTime(2024, 3, 9), 
+                Date = new DateTime(2024, 3, 9),
                 ImageUrl = "https://cdn.racingnews365.com/2024/_1092x683_crop_center-center_85_none/Qiddiya-street-track-2.jpg?v=1709640021",
                 Laps = 50,
                 CircuitInfo = "The Jeddah Corniche Circuit is a temporary street circuit, located on the Corniche – a 30km coastal resort area of the ancient Saudi Arabian city of Jeddah.",
@@ -325,7 +325,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
             {
                 Name = "Australia Grand Prix",
                 Location = "Melbourne Grand Prix Circuit",
-                Date = new DateTime(2024, 3, 24), 
+                Date = new DateTime(2024, 3, 24),
                 ImageUrl = "https://media.formula1.com/image/upload/f_auto/q_auto/v1677245019/content/dam/fom-website/2018-redesign-assets/Racehub%20header%20images%2016x9/Australia.jpg.transform/9col/image.jpg",
                 Laps = 58,
                 CircuitInfo = "The deal to host Formula 1 in Melbourne was done in 1993, using a mixture of the existing roads around the city’s Albert Park – mainly Aughtie Drive and Lakeside Drive.",
