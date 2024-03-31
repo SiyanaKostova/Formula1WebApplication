@@ -96,6 +96,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
         {
             MaxVerstappen = new Pilot
             {
+                Id = 1,
                 FirstName = "Max",
                 LastName = "Verstappen",
                 Nationality = "Dutch",
@@ -106,6 +107,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             CharlesLeclerc = new Pilot
             {
+                Id = 2,
                 FirstName = "Charles",
                 LastName = "Leclerc",
                 Nationality = "Monegasque",
@@ -116,6 +118,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             SergioPerez = new Pilot
             {
+                Id = 3,
                 FirstName = "Sergio",
                 LastName = "Perez",
                 Nationality = "Mexican",
@@ -126,6 +129,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             CarlosSainz = new Pilot
             {
+                Id = 4,
                 FirstName = "Carlos",
                 LastName = "Sainz",
                 Nationality = "Spanish",
@@ -136,6 +140,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             OscarPiastri = new Pilot
             {
+                Id = 5,
                 FirstName = "Oscar",
                 LastName = "Piastri",
                 Nationality = "Australian",
@@ -146,6 +151,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             LandoNorris = new Pilot
             {
+                Id = 6,
                 FirstName = "Lando",
                 LastName = "Norris",
                 Nationality = "British",
@@ -156,6 +162,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             GeorgeRussell = new Pilot
             {
+                Id = 7,
                 FirstName = "George",
                 LastName = "Russell",
                 Nationality = "British",
@@ -166,6 +173,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             FernandoAlonso = new Pilot
             {
+                Id = 8,
                 FirstName = "Fernando",
                 LastName = "Alonso",
                 Nationality = "Spanish",
@@ -176,6 +184,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             LanceStroll = new Pilot
             {
+                Id = 9,
                 FirstName = "Lance",
                 LastName = "Stroll",
                 Nationality = "Canadian",
@@ -186,6 +195,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             LewisHamilton = new Pilot
             {
+                Id = 10,
                 FirstName = "Lewis",
                 LastName = "Hamilton",
                 Nationality = "British",
@@ -196,6 +206,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             YukiTsunoda = new Pilot
             {
+                Id = 11,
                 FirstName = "Yuki",
                 LastName = "Tsunoda",
                 Nationality = "Japanese",
@@ -206,6 +217,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             NicoHulkenberg = new Pilot
             {
+                Id = 12,
                 FirstName = "Nico",
                 LastName = "Hulkenberg",
                 Nationality = "German",
@@ -216,6 +228,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             KevinMagnussen = new Pilot
             {
+                Id = 13,
                 FirstName = "Kevin",
                 LastName = "Magnussen",
                 Nationality = "Danish",
@@ -226,6 +239,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             AlexAlbon = new Pilot
             {
+                Id = 14,
                 FirstName = "Alex",
                 LastName = "Albon",
                 Nationality = "Thai",
@@ -236,6 +250,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             GuanyuZhou = new Pilot
             {
+                Id = 15,
                 FirstName = "Guanyu",
                 LastName = "Zhou",
                 Nationality = "Chinese",
@@ -246,6 +261,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             DanielRicciardo = new Pilot
             {
+                Id = 16,
                 FirstName = "Daniel",
                 LastName = "Ricciardo",
                 Nationality = "Australian",
@@ -256,6 +272,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             EstebanOcon = new Pilot
             {
+                Id = 17,
                 FirstName = "Esteban",
                 LastName = "Ocon",
                 Nationality = "French",
@@ -266,6 +283,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             PierreGasly = new Pilot
             {
+                Id = 18,
                 FirstName = "Pierre",
                 LastName = "Gasly",
                 Nationality = "French",
@@ -276,6 +294,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             ValtteriBottas = new Pilot
             {
+                Id = 19,
                 FirstName = "Valtteri",
                 LastName = "Bottas",
                 Nationality = "Finnish",
@@ -286,6 +305,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             LoganSargeant = new Pilot
             {
+                Id = 20,
                 FirstName = "Logan",
                 LastName = "Sargeant",
                 Nationality = "American",
@@ -299,6 +319,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
         {
             BahrainGrandPrix = new Race
             {
+                Id = 1,
                 Name = "Bahrain Grand Prix",
                 Location = "Bahrain International Circuit",
                 Date = new DateTime(2024, 3, 2),
@@ -311,6 +332,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             SaudiArabiaGrandPrix = new Race
             {
+                Id = 2,
                 Name = "Saudi Arabia Grand Prix",
                 Location = "Jeddah Corniche Circuit",
                 Date = new DateTime(2024, 3, 9),
@@ -323,6 +345,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             AustraliaGrandPrix = new Race
             {
+                Id = 3,
                 Name = "Australia Grand Prix",
                 Location = "Melbourne Grand Prix Circuit",
                 Date = new DateTime(2024, 3, 24),
@@ -338,6 +361,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
         {
             MeetAndGreet = new Event
             {
+                Id = 1,
                 Name = "F1 Meet and Greet",
                 Description = "An exclusive opportunity to meet your favorite Formula 1 drivers.",
                 ImageUrl = "https://www.circuitcat.com/wp-content/uploads/2019/05/1805100318_sainz.jpg",
@@ -349,6 +373,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             AutographSession = new Event
             {
+                Id = 2,
                 Name = "Autograph Session",
                 Description = "Get the chance to take autographs from the top F1 pilots.",
                 ImageUrl = "https://cdn-5.motorsport.com/images/amp/0R5W8yZ6/s6/f1-british-gp-2018-max-verstappen-red-bull-racing-signs-autographs-for-fans-8649080.jpg",
@@ -360,6 +385,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             ExclusivePreview = new Event
             {
+                Id= 3,
                 Name = "Exclusive Team Garage Preview",
                 Description = "A behind-the-scenes look at the teams' preparations for the race weekend.",
                 ImageUrl = "https://d3cm515ijfiu6w.cloudfront.net/wp-content/uploads/2022/06/16115532/Charles-Leclercs-car-in-the-Ferrari-garage-planetF1.jpg",
@@ -374,6 +400,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
         {
             TheStrategist = new NewsArticle
             {
+                Id = 1,
                 Title = "The Strategist",
                 Description = "Norris reckons he could have beaten Leclerc in Melbourne with a better strategy – but is he right? Max Verstappen’s retirement from Australian Grand Prix in the opening laps, along with Sergio Perez’s P6 start from the grid, set up an exciting battle for the race win and resulted in a very different looking podium. Ferrari finished the race on the top two steps closely followed by Lando Norris, with all of the top three showing the speed capable of taking the fastest lap (ultimately secured by Charles Leclerc). However, was a better finish possible for Norris? Former Aston Martin Head of Strategy Bernie Collins investigates…",
                 ImageUrl = "https://cdn-1.motorsport.com/images/amp/2wBdPEq0/s1000/lando-norris-mclaren-prepares-.jpg",
@@ -382,6 +409,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             NotWhereIExpectedToBe = new NewsArticle
             {
+                Id = 2,
                 Title = "Not where I expected to be",
                 Description = "Daniel Ricciardo didn’t manage to score points on home soil in Melbourne, on a day where his team mate finished seventh and got the team’s account up and running in the constructors’. Having now been out-qualified by Yuki Tsunoda in the first three races, the Australian was in a reflective mood after coming home in 12th place. Ricciardo’s woes in Australia stretched back to qualifying when he lost his lap time in Q1 for a clear track limits infringement, which dropped him to P18 on the grid. Although there were three retirements in the race and two Virtual Safety Car periods, Ricciardo ran out of time to climb into the points.",
                 ImageUrl = "https://thejudge13.com/wp-content/uploads/2024/02/daniel-ricciardo.webp",
@@ -390,6 +418,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
             HinchsHeroes = new NewsArticle
             {
+                Id = 3,
                 Title = "Hinch's heroes",
                 Description = "The Australian Grand Prix in Melbourne served up a superb victory for Carlos Sainz, with plenty of other impressive performances throughout the field. As usual, former IndyCar star and F1 TV pundit James Hinchcliffe was watching closely and has picked out the five drivers who impressed him the most across the race weekend at the Albert Park circuit… Carlos Sainz – P1 - This one is an inevitability, so let’s get it out of the way first. In what many pundits have labeled as Sainz’s greatest drive in F1, the Spaniard capitalised on a rare reliability misstep from Red Bull that eliminated Max Verstappen from contention only a handful of laps into the race.",
                 ImageUrl = "https://i.cbc.ca/1.6509174.1656870708!/fileImage/httpImage/1406549790.jpg",
