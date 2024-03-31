@@ -1,4 +1,4 @@
-﻿using static HouseRentingSystem.Infrastructure.Constants.DataConstants;
+﻿using static Formula1WebApplication.Infrastructure.Constants.DataConstants;
 using static Formula1WebApplication.Core.Constants.MessageConstants;
 using System.ComponentModel.DataAnnotations;
 

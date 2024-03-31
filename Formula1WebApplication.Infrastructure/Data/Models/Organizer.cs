@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static HouseRentingSystem.Infrastructure.Constants.DataConstants;
+using static Formula1WebApplication.Infrastructure.Constants.DataConstants;
 
 namespace Formula1WebApplication.Infrastructure.Data.Models
 {

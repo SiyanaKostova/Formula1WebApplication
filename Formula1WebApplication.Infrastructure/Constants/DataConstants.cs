@@ -1,4 +1,4 @@
-﻿namespace HouseRentingSystem.Infrastructure.Constants
+﻿namespace Formula1WebApplication.Infrastructure.Constants
 {
     public static class DataConstants
     {
