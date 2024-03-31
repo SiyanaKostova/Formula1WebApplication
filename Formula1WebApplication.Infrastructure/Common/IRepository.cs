@@ -1,4 +1,6 @@
-﻿namespace Formula1WebApplication.Infrastructure.Common
+﻿using Formula1WebApplication.Infrastructure.Pagination;
+
+namespace Formula1WebApplication.Infrastructure.Common
 {
     public interface IRepository
     {
@@ -13,5 +15,7 @@
         Task<T?> GetByIdAsync<T>(object id) where T : class;
 
         Task DeleteAsync<T>(object id) where T : class;
+
+        Task<PaginatedList<T>> GetPaginatedAsync<T>(IQueryable<T> query, int pageIndex, int pageSize) where T : class;
     }
 }
