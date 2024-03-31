@@ -1,4 +1,6 @@
-﻿using Formula1WebApplication.Core.Models.NewsArticle;
+﻿using Formula1WebApplication.Core.Contracts;
+using Formula1WebApplication.Core.Models.NewsArticle;
+using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,14 +8,24 @@ namespace Formula1WebApplication.Controllers
 {
     public class NewsArticleController : BaseController
 	{
-		[AllowAnonymous]
-		[HttpGet]
-		public async Task<IActionResult> All()
-		{
-			var model = new AllNewsArticlesQueryModel();
+        private readonly INewsArticleService newsArticleService;
 
-			return View(model);
-		}
+        public NewsArticleController(INewsArticleService _newsArticleService)
+        {
+            newsArticleService = _newsArticleService;
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> All(string sortOrder, string searchString, int? pageIndex)
+        {
+            const int pageSize = 2;
+
+            int currentPageIndex = pageIndex ?? 1;
+
+            var articles = await newsArticleService.GetArticlesAsync(sortOrder, searchString, currentPageIndex, pageSize);
+
+            return View(articles);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Details()
