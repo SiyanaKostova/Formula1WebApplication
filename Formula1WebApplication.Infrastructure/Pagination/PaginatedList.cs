@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Formula1WebApplication.Infrastructure.Pagination
+﻿namespace Formula1WebApplication.Infrastructure.Pagination
 {
     public class PaginatedList<T> : List<T>
     {
