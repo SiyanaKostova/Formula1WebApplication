@@ -1,5 +1,25 @@
-﻿@{
+﻿@model IEnumerable<NewsArticleIndexServiceModel>
+@{
     ViewData["Title"] = "Home Page";
+    var articles = Model.ToList();
+}
+
+@if(articles.Any() == false)
+{
+    <div class="mt-4 p-5 bg-light">
+        <h1 class="display-4">Welcome to the best place for Formula1 fans!</h1>
+        <p class="lead">
+            There are no news articles in the system currently available
+            so why don't you just add one?
+        </p>
+        <hr class="my-4">
+        <p class="lead">
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="NewsArticle" asp-action="Add" class="btn btn-primary btn-lg" role="button">Add News Article</a>
+            }
+        </p>
+    </div>
 }
 
 <div class="text-center">
