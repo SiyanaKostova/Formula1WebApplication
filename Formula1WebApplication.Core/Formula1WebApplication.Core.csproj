@@ -10,4 +10,13 @@
     <ProjectReference Include="..\Formula1WebApplication.Infrastructure\Formula1WebApplication.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Event\" />
+    <Folder Include="Models\Home\" />
+    <Folder Include="Models\Race\" />
+    <Folder Include="Models\NewsArticle\" />
+    <Folder Include="Models\Pilot\" />
+    <Folder Include="Models\Organizer\" />
+  </ItemGroup>
+
 </Project>
