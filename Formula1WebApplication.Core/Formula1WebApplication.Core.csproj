@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Models\Event\" />
-    <Folder Include="Models\Home\" />
     <Folder Include="Models\Race\" />
     <Folder Include="Models\NewsArticle\" />
     <Folder Include="Models\Pilot\" />
