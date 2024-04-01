@@ -1,8 +1,23 @@
-﻿@model NewsArticleDetailsViewModel
+﻿@model NewsArticleServiceModel
 
 @{
-    ViewBag.Title = "Delete News Article";
+    ViewData["Title"] = "Confirm Delete";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="container text-center" style="max-width: 500px;">
+    <h4>Are you sure you want to delete this article?</h4>
+    <div class="alert alert-warning" role="alert">
+        <p><strong>Title:</strong> @Model.Title</p>
+        <p><strong>Description:</strong> @Model.Description</p>
+    </div>
+    <h4>This action cannot be undone.</h4>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="All" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
