@@ -63,6 +63,22 @@ namespace Formula1WebApplication.Core.Services
             return new PaginatedList<NewsArticleServiceModel>(items, count, pageIndex, pageSize);
         }
 
+        public async Task<NewsArticleServiceModel> GetDetailsAsync(int articleId)
+        {
+            var article = await repository.AllReadOnly<NewsArticle>()
+            .Where(a => a.Id == articleId)
+            .Select(a => new NewsArticleServiceModel
+            {
+                Id = a.Id,
+                Title = a.Title,
+                Description = a.Description,
+                ImageUrl = a.ImageUrl 
+            })
+            .FirstOrDefaultAsync();
+
+            return article;
+        }
+
         public async Task<IEnumerable<NewsArticleIndexServiceModel>> LastThreeNewsArticlesAsync()
         {
             return await repository
