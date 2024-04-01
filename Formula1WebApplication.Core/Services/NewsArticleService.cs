@@ -143,5 +143,11 @@ namespace Formula1WebApplication.Core.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task DeleteAsync(int newsArticleId)
+        {
+            await repository.DeleteAsync<NewsArticle>(newsArticleId);
+            await repository.SaveChangesAsync();
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace Formula1WebApplication.Core.Contracts
         Task EditAsync(int newsArticleId, NewsArticleServiceModel model);
         Task<bool> HasOrganizerWithIdAsync(int newsArticleId, string userId);
         Task<NewsArticleServiceModel?> GetNewsArticleServiceModelByIdAsync(int id);
+        Task DeleteAsync(int newsArticleId);
     }
 }
