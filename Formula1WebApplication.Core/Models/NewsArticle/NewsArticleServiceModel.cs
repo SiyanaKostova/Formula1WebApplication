@@ -19,7 +19,7 @@ namespace Formula1WebApplication.Core.Models.NewsArticle
         ErrorMessage = LengthMessage)]
         public string Description { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = RequiredMessage)]
         public string ImageUrl { get; set; } = string.Empty;
     }
 }
