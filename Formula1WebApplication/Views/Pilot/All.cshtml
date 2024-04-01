@@ -1,8 +1,110 @@
 ﻿@model AllPilotsQueryModel
 
 @{
-	ViewBag.Title = "All Pilots";
+    ViewData["Title"] = "All Pilots";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+@section Styles {
+    <style>
+        .search-button {
+            color: #007bff;
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+
+            .search-button:hover {
+                color: #fff;
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+        .sort-button-asc {
+            color: #28a745; /* Bootstrap's .btn-success color */
+            border-color: #28a745;
+        }
+
+            .sort-button-asc:hover {
+                color: #fff;
+                background-color: #28a745;
+                border-color: #28a745;
+            }
+
+        .sort-button-desc {
+            color: #dc3545; /* Bootstrap's .btn-danger color */
+            border-color: #dc3545;
+        }
+
+            .sort-button-desc:hover {
+                color: #fff;
+                background-color: #dc3545;
+                border-color: #dc3545;
+            }
+
+        .page-link {
+            color: #007bff; /* Bootstrap primary color */
+        }
+
+        .page-item.disabled .page-link {
+            color: #6c757d; /* Bootstrap secondary color */
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+    </style>
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<!-- Search and Filter Form -->
+<form asp-action="All" method="get" class="mb-4">
+    <div class="form-row">
+        <div class="col">
+            <input type="text" name="searchTerm" class="form-control" value="@Model.SearchTerm" placeholder="Search by name..." />
+        </div>
+        <div class="col">
+            <input type="text" name="nationality" class="form-control" value="@Model.NationalityFilter" placeholder="Filter by nationality..." />
+        </div>
+        <div class="col">
+            <input type="text" name="team" class="form-control" value="@Model.TeamFilter" placeholder="Filter by team..." />
+        </div>
+        <div class="col">
+            <button type="submit" class="btn search-button">Search</button>
+        </div>
+    </div>
+</form>
+
+<!-- Sorting Links -->
+<div class="text-right mb-2">
+    <a asp-action="All" asp-route-sortOrder="firstName_asc" class="btn sort-button-asc">Sort by First Name A-Z</a>
+    <a asp-action="All" asp-route-sortOrder="firstName_desc" class="btn sort-button-desc">Sort by First Name Z-A</a>
+</div>
+
+<!-- Pilots List -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Nationality</th>
+            <th>Team</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pilot in Model.Pilots)
+        {
+            <tr>
+                <td>@pilot.FirstName</td>
+                <td>@pilot.LastName</td>
+                <td>@pilot.Nationality</td>
+                <td>@pilot.TeamName</td>
+                <td>
+                    <!-- Details Button -->
+                    <a asp-action="Details" asp-route-id="@pilot.Id" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
