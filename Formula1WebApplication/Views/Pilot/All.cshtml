@@ -108,3 +108,22 @@
         }
     </tbody>
 </table>
+
+<nav aria-label="Pilots pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.Pilots.PageIndex == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="All" asp-route-pageIndex="@(Model.Pilots.PageIndex - 1)" asp-route-searchTerm="@Model.SearchTerm" asp-route-nationality="@Model.NationalityFilter" asp-route-team="@Model.TeamFilter" asp-route-sortOrder="@Model.SortOrder">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= Model.Pilots.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.Pilots.PageIndex ? "active" : "")">
+                <a class="page-link" asp-action="All" asp-route-pageIndex="@i" asp-route-searchTerm="@Model.SearchTerm" asp-route-nationality="@Model.NationalityFilter" asp-route-team="@Model.TeamFilter" asp-route-sortOrder="@Model.SortOrder">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(Model.Pilots.PageIndex >= Model.Pilots.TotalPages ? "disabled" : "")">
+            <a class="page-link" asp-action="All" asp-route-pageIndex="@(Model.Pilots.PageIndex + 1)" asp-route-searchTerm="@Model.SearchTerm" asp-route-nationality="@Model.NationalityFilter" asp-route-team="@Model.TeamFilter" asp-route-sortOrder="@Model.SortOrder">Next</a>
+        </li>
+    </ul>
+</nav>
