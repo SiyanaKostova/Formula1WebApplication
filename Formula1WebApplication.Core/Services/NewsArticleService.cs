@@ -66,9 +66,6 @@ namespace Formula1WebApplication.Core.Services
                 case "newest":
                     query = query.OrderByDescending(n => n.Id);
                     break;
-                case "oldest":
-                    query = query.OrderBy(n => n.Id);
-                    break;
                 default:
                     query = query.OrderByDescending(n => n.Id);
                     break;

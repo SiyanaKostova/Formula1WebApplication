@@ -24,6 +24,9 @@ namespace Formula1WebApplication.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> All(string sortOrder, string searchString, int? pageIndex)
         {
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;
+
             const int pageSize = 2;
 
             int currentPageIndex = pageIndex ?? 1;
