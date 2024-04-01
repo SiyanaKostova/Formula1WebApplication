@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Formula1WebApplication.Core\Formula1WebApplication.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-  </ItemGroup>
-
 </Project>
