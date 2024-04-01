@@ -4,7 +4,7 @@ using static Formula1WebApplication.Infrastructure.Constants.DataConstants;
 
 namespace Formula1WebApplication.Core.Models.Pilot
 {
-    public class PilotServiceModel
+    public class PilotAllServiceModel
     {
         public int Id { get; set; }
 
@@ -31,14 +31,5 @@ namespace Formula1WebApplication.Core.Models.Pilot
         [StringLength(PilotTeamNameMaxLength,
         ErrorMessage = MaxLengthMessage)]
         public string TeamName { get; set; } = string.Empty;
-
-        [Display(Name = "Biography")]
-        [StringLength(PilotBiographyMaxLength,
-        MinimumLength = PilotBiographyMinLength,
-        ErrorMessage = LengthMessage)]
-        public string Biography { get; set; } = string.Empty;
-
-        [Display(Name = "Image")]
-        public string ImagePath { get; set; } = string.Empty;
     }
 }
