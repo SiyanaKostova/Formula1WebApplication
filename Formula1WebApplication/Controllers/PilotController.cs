@@ -1,5 +1,4 @@
 ﻿using Formula1WebApplication.Core.Contracts;
-using Formula1WebApplication.Core.Models.Pilot;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Formula1WebApplication.Controllers
