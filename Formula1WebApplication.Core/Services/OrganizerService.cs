@@ -45,5 +45,11 @@ namespace Formula1WebApplication.Core.Services
 
             return true;
         }
+
+        public async Task<int?> GetOrganizerIdAsync(string userId)
+        {
+            return (await repository.AllReadOnly<Organizer>()
+                .FirstOrDefaultAsync(a => a.UserId == userId))?.Id;
+        }
     }
 }
