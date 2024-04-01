@@ -16,7 +16,7 @@ namespace Formula1WebApplication.Core.Services
 
         public async Task<bool> IsUserAlreadyOrganizerAsync(string userId)
         {
-            return await repository.All<Organizer>()
+            return await repository.AllReadOnly<Organizer>()
                 .AnyAsync(o => o.UserId == userId);
         }
 
