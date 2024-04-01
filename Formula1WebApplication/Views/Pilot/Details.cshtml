@@ -1,8 +1,56 @@
 ﻿@model PilotDetailsServiceModel
 
 @{
-    ViewBag.Title = "Pilot Details";
+    ViewData["Title"] = "Pilot Details";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+@section Styles {
+    <style>
+        .pilot-details-container {
+            border: 1px solid #dee2e6; 
+            border-radius: 0.25rem; 
+            margin: auto; 
+            max-width: 50%; 
+            transition: background-color 0.3s ease; 
+        }
+
+            .pilot-details-container:hover {
+                background-color: #f0f0f0; 
+            }
+
+        .pilot-image {
+            max-height: 200px; 
+            max-width: 100%; 
+            display: block;
+            margin: auto; 
+            padding-top: 10px; 
+        }
+
+        .detail-item {
+            padding: 0.5rem 1rem; 
+        }
+
+        .detail-title {
+            font-weight: bold;
+        }
+    </style>
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="pilot-details-container">
+    <div class="text-center">
+        <img src="@Model.ImagePath" class="pilot-image" alt="Image of @Model.FirstName @Model.LastName">
+    </div>
+    <div class="detail-item">
+        <h5 class="detail-title">@Model.FirstName @Model.LastName</h5>
+        <p><strong>Nationality:</strong> @Model.Nationality</p>
+        <p><strong>Team:</strong> @Model.TeamName</p>
+        <p><strong>Biography:</strong> <br> @Model.Biography</p>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="@Url.Action("All", "Pilot")" class="btn btn-primary">Back to All Pilots</a>
+</div>
