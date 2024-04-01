@@ -1,7 +1,52 @@
-﻿@model NewsArticleFormModel
+﻿@model NewsArticleServiceModel
+
 @{
-	ViewBag.Title = "Add News Article";
+    ViewData["Title"] = "Add News Article";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+@section Styles {
+    <style>
+        .form-container {
+            max-width: 600px; /* Adjust the width as needed */
+            margin: auto; /* Center the form on the page */
+            padding: 15px; /* Add some padding inside the form container */
+        }
+
+        .center-button {
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center the button horizontally */
+            margin-top: 20px; /* Add some space above the button */
+        }
+    </style>
+}
+
+<div class="form-container">
+    <form asp-action="Add" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="center-button">
+            <button type="submit" class="btn btn-primary">Add Article</button>
+        </div>
+    </form>
+</div>
