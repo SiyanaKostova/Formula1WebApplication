@@ -10,7 +10,7 @@ namespace Formula1WebApplication.Core.Models.NewsArticle
 
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(NewsArticleTitleMaxLength,
-        ErrorMessage = LengthMessage)]
+        ErrorMessage = MaxLengthMessage)]
         public string Title { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
