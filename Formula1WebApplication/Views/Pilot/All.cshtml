@@ -19,7 +19,7 @@
             }
 
         .sort-button-asc {
-            color: #28a745; /* Bootstrap's .btn-success color */
+            color: #28a745; 
             border-color: #28a745;
         }
 
@@ -30,7 +30,7 @@
             }
 
         .sort-button-desc {
-            color: #dc3545; /* Bootstrap's .btn-danger color */
+            color: #dc3545; 
             border-color: #dc3545;
         }
 
@@ -41,11 +41,11 @@
             }
 
         .page-link {
-            color: #007bff; /* Bootstrap primary color */
+            color: #007bff; 
         }
 
         .page-item.disabled .page-link {
-            color: #6c757d; /* Bootstrap secondary color */
+            color: #6c757d;
             pointer-events: none;
             cursor: auto;
             background-color: #fff;
@@ -57,7 +57,6 @@
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 
-<!-- Search and Filter Form -->
 <form asp-action="All" method="get" class="mb-4">
     <div class="form-row">
         <div class="col">
@@ -75,13 +74,11 @@
     </div>
 </form>
 
-<!-- Sorting Links -->
 <div class="text-right mb-2">
     <a asp-action="All" asp-route-sortOrder="firstName_asc" class="btn sort-button-asc">Sort by First Name A-Z</a>
     <a asp-action="All" asp-route-sortOrder="firstName_desc" class="btn sort-button-desc">Sort by First Name Z-A</a>
 </div>
 
-<!-- Pilots List -->
 <table class="table">
     <thead>
         <tr>
@@ -101,7 +98,6 @@
                 <td>@pilot.Nationality</td>
                 <td>@pilot.TeamName</td>
                 <td>
-                    <!-- Details Button -->
                     <a asp-action="Details" asp-route-id="@pilot.Id" class="btn btn-primary">Details</a>
                 </td>
             </tr>
