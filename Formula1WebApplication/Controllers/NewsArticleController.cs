@@ -108,14 +108,34 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var model = new NewsArticleFormModel();
+            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            var newsArticle = await newsArticleService.GetDetailsAsync(id);
+
+            var model = new NewsArticleServiceModel()
+            {
+                Id = id,
+                Title = newsArticle.Title,
+                Description = newsArticle.Description,
+                ImageUrl = newsArticle.ImageUrl
+            };
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(NewsArticleDetailsViewModel model)
+        public async Task<IActionResult> Delete(NewsArticleServiceModel model)
         {
+            if (await newsArticleService.HasOrganizerWithIdAsync(model.Id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            await newsArticleService.DeleteAsync(model.Id);
+
             return RedirectToAction(nameof(All));
         }
     }
