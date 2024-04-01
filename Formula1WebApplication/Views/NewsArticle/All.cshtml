@@ -22,19 +22,10 @@
     </div>
 </div>
 
-<div class="list-group">
+<div class="row">
     @foreach (var article in Model)
     {
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <h5>@article.Title</h5>
-                <p>@article.Description</p>
-                <a asp-action="Details" asp-route-id="@article.Id" class="btn btn-primary">Details</a>
-            </div>
-            <div class="col-md-4">
-                <img src="@Url.Content(article.ImageUrl)" class="img-fluid" alt="@article.Title">
-            </div>
-        </div>
+        <partial name="_NewsArticlePartial" model="@article" />
     }
 </div>
 
