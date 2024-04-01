@@ -28,11 +28,16 @@ namespace Formula1WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int id)
         {
-            var model = new NewsArticleDetailsServiceModel();
+            var articleDetails = await newsArticleService.GetDetailsAsync(id);
 
-            return View(model);
+            if (articleDetails == null)
+            {
+                return NotFound();
+            }
+
+            return View(articleDetails);
         }
 
 		[HttpGet]
