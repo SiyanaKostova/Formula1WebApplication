@@ -2,6 +2,7 @@
 using Formula1WebApplication.Core.Models.Pilot;
 using Formula1WebApplication.Infrastructure.Common;
 using Formula1WebApplication.Infrastructure.Data.Models;
+using Formula1WebApplication.Infrastructure.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace Formula1WebApplication.Core.Services
@@ -15,7 +16,7 @@ namespace Formula1WebApplication.Core.Services
             repository = _repository;
         }
 
-        public async Task<AllPilotsQueryModel> GetAllPilotsAsync(string searchTerm, string nationalityFilter, string teamFilter, string sortOrder)
+        public async Task<AllPilotsQueryModel> GetAllPilotsAsync(string searchTerm, string nationalityFilter, string teamFilter, string sortOrder, int pageIndex, int pageSize)
         {
             var pilotQuery = repository.All<Pilot>().AsQueryable();
 
@@ -47,8 +48,40 @@ namespace Formula1WebApplication.Core.Services
                     break;
             }
 
-            var pilots = await pilotQuery
-                .Select(p => new PilotServiceModel
+            var count = await pilotQuery.CountAsync();
+
+            var items = await pilotQuery
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => new PilotAllServiceModel
+                {
+                    Id = p.Id,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    Nationality = p.Nationality,
+                    TeamName = p.TeamName,
+                })
+                .ToListAsync();
+
+            var paginatedList = new PaginatedList<PilotAllServiceModel>(items, count, pageIndex, pageSize);
+
+            return new AllPilotsQueryModel
+            {
+                Pilots = paginatedList,
+                SearchTerm = searchTerm,
+                NationalityFilter = nationalityFilter,
+                TeamFilter = teamFilter,
+                SortOrder = sortOrder,
+                CurrentPage = pageIndex,
+                PageSize = pageSize
+            };
+        }
+
+        public async Task<PilotDetailsServiceModel> GetDetailsAsync(int pilotId)
+        {
+            var pilot = await repository.All<Pilot>()
+                .Where(p => p.Id == pilotId)
+                .Select(p => new PilotDetailsServiceModel
                 {
                     Id = p.Id,
                     FirstName = p.FirstName,
@@ -58,16 +91,9 @@ namespace Formula1WebApplication.Core.Services
                     Biography = p.Biography,
                     ImagePath = p.ImagePath
                 })
-                .ToListAsync();
+                .FirstOrDefaultAsync();
 
-            return new AllPilotsQueryModel
-            {
-                Pilots = pilots,
-                SearchTerm = searchTerm,
-                NationalityFilter = nationalityFilter,
-                TeamFilter = teamFilter,
-                SortOrder = sortOrder
-            };
+            return pilot;
         }
     }
 }
