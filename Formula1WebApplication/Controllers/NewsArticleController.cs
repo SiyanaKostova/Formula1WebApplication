@@ -3,16 +3,22 @@ using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Formula1WebApplication.Controllers
 {
     public class NewsArticleController : BaseController
 	{
         private readonly INewsArticleService newsArticleService;
+        private readonly IOrganizerService organizerService;
 
-        public NewsArticleController(INewsArticleService _newsArticleService)
+        public NewsArticleController(
+            INewsArticleService _newsArticleService,
+            IOrganizerService _organizerService)
         {
             newsArticleService = _newsArticleService;
+            organizerService = _organizerService;
+
         }
 
         [AllowAnonymous]
@@ -43,29 +49,60 @@ namespace Formula1WebApplication.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
-			var model = new NewsArticleFormModel();
+			var model = new NewsArticleServiceModel();
 
 			return View(model);
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Add(NewsArticleFormModel model)
-		{
-			return RedirectToAction(nameof(Details), new { id = 1 });
-		}
+        [HttpPost]
+        public async Task<IActionResult> Add(NewsArticleServiceModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var organizerId = await organizerService.GetOrganizerIdAsync(User.Id());
+
+            if (organizerId == null)
+            {
+                return NotFound();
+            }
+
+            await newsArticleService.AddAsync(model, organizerId.Value);
+
+            return RedirectToAction(nameof(All));
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new NewsArticleFormModel();
+            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = await newsArticleService.GetNewsArticleServiceModelByIdAsync(id);
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, NewsArticleFormModel model)
+        public async Task<IActionResult> Edit(int id, NewsArticleServiceModel model)
         {
-            return RedirectToAction(nameof(Details), new { id = 1 });
+            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+
+            await newsArticleService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
