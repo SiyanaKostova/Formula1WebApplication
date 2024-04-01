@@ -14,18 +14,24 @@ namespace Formula1WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All(string searchTerm, string nationality, string team, string sortOrder)
+        public async Task<IActionResult> All(string searchTerm, string nationality, string team, string sortOrder, int pageIndex = 1, int pageSize = 10)
         {
-            var queryModel = await pilotService.GetAllPilotsAsync(searchTerm, nationality, team, sortOrder);
-            return View(queryModel);
+            var pilotModel = await pilotService.GetAllPilotsAsync(searchTerm, nationality, team, sortOrder, pageIndex, pageSize);
+
+            return View(pilotModel);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int id)
         {
-            var model = new PilotDetailsServiceModel();
+            var pilotDetails = await pilotService.GetDetailsAsync(id);
 
-            return View(model);
+            if (pilotDetails == null)
+            {
+                return NotFound(); 
+            }
+
+            return View(pilotDetails);
         }
     }
 }
