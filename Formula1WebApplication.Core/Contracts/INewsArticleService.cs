@@ -9,5 +9,9 @@ namespace Formula1WebApplication.Core.Contracts
         Task<IEnumerable<NewsArticleIndexServiceModel>> LastThreeNewsArticlesAsync();
         Task<PaginatedList<NewsArticleServiceModel>> GetArticlesAsync(string sortOrder, string searchString, int pageIndex, int pageSize);
         Task<NewsArticleServiceModel> GetDetailsAsync(int articleId);
+        Task AddAsync(NewsArticleServiceModel model, int organizerId);
+        Task EditAsync(int newsArticleId, NewsArticleServiceModel model);
+        Task<bool> HasOrganizerWithIdAsync(int newsArticleId, string userId);
+        Task<NewsArticleServiceModel?> GetNewsArticleServiceModelByIdAsync(int id);
     }
 }
