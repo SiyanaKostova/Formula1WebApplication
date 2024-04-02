@@ -130,6 +130,24 @@ namespace Formula1WebApplication.Core.Services
             return eventModel;
         }
 
+        public async Task<IEnumerable<EventServiceModel>> GetMyEventsAsync(string userId)
+        {
+            var events = await repository.All<EventUser>()
+            .Where(eu => eu.UserId == userId)
+            .Select(eu => new EventServiceModel
+            {
+                Id = eu.Event.Id,
+                Name = eu.Event.Name,
+                Description = eu.Event.Description,
+                ImageUrl = eu.Event.ImageUrl,
+                Location = eu.Event.Location,
+                Date = eu.Event.Date,
+            })
+            .ToListAsync();
+
+            return events;
+        }
+
         public async Task<bool> HasOrganizerWithIdAsync(int eventId, string userId)
         {
             return await repository.AllReadOnly<Event>()
