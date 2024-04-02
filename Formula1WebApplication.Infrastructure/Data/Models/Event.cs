@@ -43,5 +43,7 @@ namespace Formula1WebApplication.Infrastructure.Data.Models
 
         [Comment("User Id")]
         public string? UserId { get; set; }
+
+        public ICollection<EventUser> EventUsers { get; set; } = new List<EventUser>();
     }
 }
