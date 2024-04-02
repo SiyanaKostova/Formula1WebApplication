@@ -1,7 +1,14 @@
-﻿@model EventFormModel
+﻿@model EventServiceModel
+
 @{
     ViewData["Title"] = "Edit Event";
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<partial name="_EventFormPartial" model="@Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
