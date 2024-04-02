@@ -13,25 +13,14 @@
                 <p class="card-text"><small class="text-muted">@Model.Location</small></p>
                 <p class="card-text"><small class="text-muted">@Model.Date.ToString("MMMM dd, yyyy")</small></p>
                 <div class="text-center">
-                    <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-outline-primary btn-sm">Details</a>
+                    <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-outline-primary btn-sm uniform-btn">Details</a>
                     @if (await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
                     {
-                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm uniform-btn">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm uniform-btn">Delete</a>
                     }
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@section Styles {
-    <style>
-        .btn-sm {
-            padding: .25rem .5rem; /* Adjust padding to control size */
-            font-size: .875rem; /* Ensure font size is consistent */
-            line-height: 1.5; /* Adjust line height for text alignment */
-            border-radius: .2rem; /* Match border-radius for aesthetic consistency */
-        }
-    </style>
-}
