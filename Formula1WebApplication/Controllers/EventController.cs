@@ -1,5 +1,6 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Models.Event;
+using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -122,16 +123,38 @@ namespace Formula1WebApplication.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var model = new EventFormModel();
+            if (await eventService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
 
-			return View(model);
-		}
+            var eventToDelete = await eventService.GetDetailsAsync(id);
+
+            var model = new EventServiceModel()
+            {
+                Id = id,
+                Name = eventToDelete.Name,
+                Date = eventToDelete.Date,
+                Description = eventToDelete.Description,
+                ImageUrl = eventToDelete.ImageUrl,
+                Location = eventToDelete.Location
+            };
+
+            return View(model);
+        }
 
 		[HttpPost]
 		public async Task<IActionResult> Delete(EventServiceModel model)
 		{
-			return RedirectToAction(nameof(All));
-		}
+            if (await eventService.HasOrganizerWithIdAsync(model.Id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            await eventService.DeleteAsync(model.Id);
+
+            return RedirectToAction(nameof(All));
+        }
 
 		[HttpPost]
 		public async Task<IActionResult> Join(int id)
