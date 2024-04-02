@@ -20,5 +20,9 @@ namespace Formula1WebApplication.Core.Contracts
         Task<EventServiceModel?> GetEventServiceModelByIdAsync(int id);
 
         Task DeleteAsync(int eventId);
+
+        Task<bool> JoinEventAsync(int eventId, string userId);
+
+        Task<bool> IsJoinedByIUserWithIdAsync(int eventId, string userId);
     }
 }

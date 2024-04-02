@@ -135,5 +135,41 @@ namespace Formula1WebApplication.Core.Services
             return await repository.AllReadOnly<Event>()
                 .AnyAsync(a => a.Id == eventId && a.Organizer.UserId == userId);
         }
+
+        public async Task<bool> IsJoinedByIUserWithIdAsync(int eventId, string userId)
+        {
+            bool result = false;
+
+            var eventToJoin = await repository.GetByIdAsync<Event>(eventId);
+
+            if (eventToJoin != null)
+            {
+                result = eventToJoin.UserId == userId;
+            }
+
+            return result;
+        }
+
+        public async Task<bool> JoinEventAsync(int eventId, string userId)
+        {
+            var isUserJoined = await repository.All<EventUser>()
+                                    .AnyAsync(eu => eu.EventId == eventId && eu.UserId == userId);
+
+            if (isUserJoined)
+            {
+                return false;
+            }
+
+            var eventUser = new EventUser
+            {
+                EventId = eventId,
+                UserId = userId
+            };
+
+            await repository.AddAsync(eventUser);
+            await repository.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
