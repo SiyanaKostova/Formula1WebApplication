@@ -1,5 +1,6 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Models.Event;
+using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -89,15 +90,33 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
-			var model = new EventFormModel();
+            if (await eventService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
 
-			return View(model);
-		}
+            var model = await eventService.GetEventServiceModelByIdAsync(id);
+
+            return View(model);
+        }
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(int id, EventFormModel model)
+		public async Task<IActionResult> Edit(int id, EventServiceModel model)
 		{
-            return RedirectToAction(nameof(Details), new { id = 1 });
+            if (await eventService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+
+            await eventService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(All));
         }
 
 		[HttpGet]
