@@ -42,9 +42,16 @@ namespace Formula1WebApplication.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Mine()
 		{
-			var model = new AllEventsQueryModel();
+            var userId = User.Id();
 
-			return View(model);
+            IEnumerable<EventServiceModel> model;
+
+            if (await organizerService.ExistsByIdAsync(userId))
+            {
+
+            }
+
+            return View();
 		}
 
 		[HttpGet]
@@ -159,8 +166,15 @@ namespace Formula1WebApplication.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Join(int id)
 		{
-			return RedirectToAction(nameof(Mine));
-		}
+            var result = await eventService.JoinEventAsync(id, User.Id());
+
+            if (!result)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(All));
+        }
 
         [HttpPost]
         public async Task<IActionResult> Leave(int id)
