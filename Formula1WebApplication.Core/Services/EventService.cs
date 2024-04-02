@@ -156,16 +156,8 @@ namespace Formula1WebApplication.Core.Services
 
         public async Task<bool> IsJoinedByIUserWithIdAsync(int eventId, string userId)
         {
-            bool result = false;
-
-            var eventToJoin = await repository.GetByIdAsync<Event>(eventId);
-
-            if (eventToJoin != null)
-            {
-                result = eventToJoin.UserId == userId;
-            }
-
-            return result;
+            return await repository.All<EventUser>()
+                .AnyAsync(eu => eu.EventId == eventId && eu.UserId == userId);
         }
 
         public async Task<bool> JoinEventAsync(int eventId, string userId)
@@ -185,6 +177,22 @@ namespace Formula1WebApplication.Core.Services
             };
 
             await repository.AddAsync(eventUser);
+            await repository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> LeaveEventAsync(int eventId, string userId)
+        {
+            var eventUser = await repository.All<EventUser>()
+                                .FirstOrDefaultAsync(eu => eu.EventId == eventId && eu.UserId == userId);
+
+            if (eventUser == null)
+            {
+                return false;
+            }
+
+            repository.Remove<EventUser>(eventUser);
             await repository.SaveChangesAsync();
 
             return true;

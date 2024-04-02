@@ -26,5 +26,7 @@ namespace Formula1WebApplication.Core.Contracts
         Task<bool> IsJoinedByIUserWithIdAsync(int eventId, string userId);
 
         Task<IEnumerable<EventServiceModel>> GetMyEventsAsync(string userId);
+
+        Task<bool> LeaveEventAsync(int eventId, string userId);
     }
 }
