@@ -41,7 +41,6 @@ namespace Formula1WebApplication.Infrastructure.Data.Models
         [ForeignKey(nameof(OrganizerId))]
         public Organizer Organizer { get; set; } = null!;
 
-        [Required]
         [Comment("User Id")]
         public string? UserId { get; set; }
     }
