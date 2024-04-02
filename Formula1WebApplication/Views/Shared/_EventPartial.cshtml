@@ -28,9 +28,11 @@
                                 <button type="submit" class="btn btn-success btn-sm">Join</button>
                             </form>
                         }
-                        else if (await eventService.IsJoinedByIUserWithIdAsync(Model.Id, User.Id()))
+                        @if (await eventService.IsJoinedByIUserWithIdAsync(Model.Id, User.Id()))
                         {
-                            <a asp-action="Leave" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Leave</a>
+                            <form asp-action="Leave" asp-route-id="@Model.Id" method="post">
+                                <button type="submit" class="btn btn-warning btn-sm">Leave</button>
+                            </form>
                         }
                     </div>
                 </div>
