@@ -1,8 +1,98 @@
 ﻿@model AllEventsQueryModel
 
 @{
-	ViewBag.Title = "All Events";
+    ViewData["Title"] = "All Events";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="container" style="max-width: 1000px;">
+    <div class="row mb-3">
+        <div class="col">
+            <form asp-action="All" method="get" class="form-inline">
+                <input type="text" name="searchString" value="@Model.SearchString" class="form-control mr-2" placeholder="Search by title or location..." />
+                <button type="submit" class="btn btn-outline-info">Search</button>
+            </form>
+        </div>
+        <div class="col text-right d-flex justify-content-end sort-buttons">
+            <a asp-action="All" asp-route-sortOrder="name" class="btn btn-outline-primary">Sort by Name A-Z</a>
+            <a asp-action="All" asp-route-sortOrder="name_desc" class="btn btn-outline-primary">Sort by Name Z-A</a>
+            <a asp-action="All" asp-route-sortOrder="newest" class="btn btn-outline-primary">Sort by Newest</a>
+        </div>
+    </div>
+
+    @foreach (var eventItem in Model.Events)
+    {
+        <div class="card mb-3 event-card">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="@eventItem.ImageUrl" class="card-img" alt="Event Image" style="max-height: 200px; object-fit: cover;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@eventItem.Name</h5>
+                        <p class="card-text">@eventItem.Description</p>
+                        <p class="card-text"><small class="text-muted">@eventItem.Location</small></p>
+                        <p class="card-text"><small class="text-muted">@eventItem.Date.ToString("MMMM dd, yyyy")</small></p>
+                        <div class="text-center">
+                            <a href="@Url.Action("Details", new { id = eventItem.Id })" class="btn btn-outline-primary btn-sm">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.Events.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" href="?pageIndex=@(Model.Events.PageIndex - 1)&searchString=@Model.SearchString&sortOrder=@Model.SortOrder">Previous</a>
+            </li>
+            <li class="page-item @(Model.Events.HasNextPage ? "" : "disabled")">
+                <a class="page-link" href="?pageIndex=@(Model.Events.PageIndex + 1)&searchString=@Model.SearchString&sortOrder=@Model.SortOrder">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@section Styles {
+    <style>
+        .btn-outline-primary {
+            color: #fff !important; 
+            background-color: #007bff !important; 
+            border-color: #007bff !important; 
+            padding: 0.375rem 0.75rem !important; 
+            font-size: 1rem !important; 
+            line-height: 1.5 !important; 
+            border-radius: 0.25rem !important; 
+            transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; 
+        }
+
+            .btn-outline-primary:hover {
+                background-color: #0056b3 !important; 
+                border-color: #004085 !important; 
+            }
+
+        .sort-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+            .sort-buttons .btn + .btn {
+                margin-left: 0.5rem !important; 
+            }
+
+        .event-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .event-card .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+    </style>
+}
