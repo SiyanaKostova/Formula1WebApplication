@@ -1,17 +1,21 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Models.Event;
-using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Formula1WebApplication.Controllers
 {
-	public class EventController : BaseController
+    public class EventController : BaseController
 	{
         private readonly IEventService eventService;
+        private readonly IOrganizerService organizerService;
 
-        public EventController(IEventService _eventService)
+        public EventController(
+            IEventService _eventService,
+            IOrganizerService _organizerService)
         {
             eventService = _eventService;
+            organizerService = _organizerService;
         }
 
         [HttpGet]
@@ -55,20 +59,34 @@ namespace Formula1WebApplication.Controllers
 		}
 
         [HttpGet]
-		public async Task<IActionResult> Add()
-		{
-			var model = new EventFormModel();
+        public async Task<IActionResult> Add()
+        {
+            var model = new EventServiceModel();
 
-			return View(model);
-		}
+            return View(model);
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> Add(EventFormModel model)
-		{
-			return RedirectToAction(nameof(Details), new { id = 1 });
-		}
+        [HttpPost]
+        public async Task<IActionResult> Add(EventServiceModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-		[HttpGet]
+            var organizerId = await organizerService.GetOrganizerIdAsync(User.Id());
+
+            if (organizerId == null)
+            {
+                return NotFound();
+            }
+
+            await eventService.AddAsync(model, organizerId.Value);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
 			var model = new EventFormModel();
