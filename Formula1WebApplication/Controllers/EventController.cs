@@ -2,6 +2,7 @@
 using Formula1WebApplication.Core.Models.Event;
 using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Core.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -168,13 +169,20 @@ namespace Formula1WebApplication.Controllers
                 return BadRequest();
             }
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Mine));
         }
 
         [HttpPost]
         public async Task<IActionResult> Leave(int id)
         {
-            return RedirectToAction(nameof(Mine));
+            var success = await eventService.LeaveEventAsync(id, User.Id());
+
+            if (!success)
+            {
+                return NotFound(); 
+            }
+
+            return RedirectToAction(nameof(Mine)); 
         }
     }
 }
