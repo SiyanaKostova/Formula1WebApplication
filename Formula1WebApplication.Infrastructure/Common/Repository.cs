@@ -60,5 +60,10 @@ namespace Formula1WebApplication.Infrastructure.Common
             var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
+
+        public void Remove<T>(T entity) where T : class
+        {
+            DbSet<T>().Remove(entity);
+        }
     }
 }

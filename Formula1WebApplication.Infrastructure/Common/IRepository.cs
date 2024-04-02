@@ -17,5 +17,7 @@ namespace Formula1WebApplication.Infrastructure.Common
         Task DeleteAsync<T>(object id) where T : class;
 
         Task<PaginatedList<T>> GetPaginatedAsync<T>(IQueryable<T> query, int pageIndex, int pageSize) where T : class;
+
+        void Remove<T>(T entity) where T : class;
     }
 }
