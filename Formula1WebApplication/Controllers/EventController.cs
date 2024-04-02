@@ -1,17 +1,36 @@
-﻿using Formula1WebApplication.Core.Models.Event;
+﻿using Formula1WebApplication.Core.Contracts;
+using Formula1WebApplication.Core.Models.Event;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Formula1WebApplication.Controllers
 {
 	public class EventController : BaseController
 	{
-		[HttpGet]
-		public async Task<IActionResult> All()
-		{
-			var model = new AllEventsQueryModel();
+        private readonly IEventService eventService;
 
-			return View(model);
-		}
+        public EventController(IEventService _eventService)
+        {
+            eventService = _eventService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> All(int pageIndex = 1, string searchString = "", string sortOrder = "")
+        {
+			const int pageSize = 2;
+
+            var events = await eventService.GetAllEventsAsync(pageIndex, pageSize, searchString, sortOrder);
+
+            var model = new AllEventsQueryModel
+            {
+                Events = events,
+                PageIndex = pageIndex,
+                TotalPages = events.TotalPages,
+                SearchString = searchString,
+                SortOrder = sortOrder
+            };
+
+            return View(model);
+        }
 
 		[HttpGet]
 		public async Task<IActionResult> Mine()
@@ -24,7 +43,7 @@ namespace Formula1WebApplication.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Details()
 		{
-			var model = new EventDetailsServiceModel();
+			var model = new EventServiceModel();
 
 			return View(model);
 		}
@@ -66,7 +85,7 @@ namespace Formula1WebApplication.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Delete(EventDetailsViewModel model)
+		public async Task<IActionResult> Delete(EventServiceModel model)
 		{
 			return RedirectToAction(nameof(All));
 		}
