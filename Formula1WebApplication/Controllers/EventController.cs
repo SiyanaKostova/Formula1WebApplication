@@ -1,5 +1,6 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Models.Event;
+using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Formula1WebApplication.Controllers
@@ -41,14 +42,19 @@ namespace Formula1WebApplication.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Details()
+		public async Task<IActionResult> Details(int id)
 		{
-			var model = new EventServiceModel();
+			var eventDetails = await eventService.GetDetailsAsync(id);
 
-			return View(model);
+			if (eventDetails == null)
+			{
+				return NotFound();
+			}
+
+			return View(eventDetails);
 		}
 
-		[HttpGet]
+        [HttpGet]
 		public async Task<IActionResult> Add()
 		{
 			var model = new EventFormModel();
