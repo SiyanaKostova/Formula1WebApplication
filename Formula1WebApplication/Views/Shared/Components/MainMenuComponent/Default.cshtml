@@ -1,4 +1,6 @@
-﻿<ul class="navbar-nav flex-grow-1">
+﻿@inject IOrganizerService organizerService
+
+<ul class="navbar-nav flex-grow-1">
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="NewsArticle" asp-action="All">All News Articles</a>
     </li>
@@ -20,14 +22,17 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Mine">My Events</a>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Race" asp-action="Add">Add Race</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Add">Add Event</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="NewsArticle" asp-action="Add">Add News Article</a>
-        </li>
+        @if(await organizerService.ExistsByIdAsync(User.Id()))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Race" asp-action="Add">Add Race</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Add">Add Event</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="NewsArticle" asp-action="Add">Add News Article</a>
+            </li>
+        }
     }
 </ul>
