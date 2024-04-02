@@ -32,6 +32,22 @@ namespace Formula1WebApplication.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        public async Task EditAsync(int eventId, EventServiceModel model)
+        {
+            var eventToEdit = await repository.GetByIdAsync<Event>(eventId);
+
+            if (eventToEdit != null)
+            {
+                eventToEdit.Name = model.Name;
+                eventToEdit.Description = model.Description;
+                eventToEdit.ImageUrl = model.ImageUrl;
+                eventToEdit.Location = model.Location;
+                eventToEdit.Date = model.Date;
+
+                await repository.SaveChangesAsync();
+            }
+        }
+
         public async Task<PaginatedList<EventServiceModel>> GetAllEventsAsync(int pageIndex, int pageSize, string searchString, string sortOrder)
         {
             var query = repository.All<Event>()
@@ -88,6 +104,30 @@ namespace Formula1WebApplication.Core.Services
                 .FirstOrDefaultAsync();
 
             return eventDetails;
+        }
+
+        public async Task<EventServiceModel?> GetEventServiceModelByIdAsync(int id)
+        {
+            var eventModel = await repository.AllReadOnly<Event>()
+                .Where(e => e.Id == id)
+                .Select(e => new EventServiceModel()
+                {
+                    Id= e.Id,
+                    ImageUrl = e.ImageUrl,
+                    Date = e.Date,
+                    Description = e.Description,
+                    Location = e.Location,
+                    Name = e.Name
+                })
+                .FirstOrDefaultAsync();
+
+            return eventModel;
+        }
+
+        public async Task<bool> HasOrganizerWithIdAsync(int eventId, string userId)
+        {
+            return await repository.AllReadOnly<Event>()
+                .AnyAsync(a => a.Id == eventId && a.Organizer.UserId == userId);
         }
     }
 }
