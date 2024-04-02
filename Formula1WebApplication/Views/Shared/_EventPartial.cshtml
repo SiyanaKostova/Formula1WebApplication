@@ -1,0 +1,37 @@
+﻿@model EventServiceModel
+@inject IEventService eventService
+
+<div class="card mb-3 event-card">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="@Model.ImageUrl" class="card-img" alt="Event Image" style="max-height: 200px; object-fit: cover;">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">@Model.Description</p>
+                <p class="card-text"><small class="text-muted">@Model.Location</small></p>
+                <p class="card-text"><small class="text-muted">@Model.Date.ToString("MMMM dd, yyyy")</small></p>
+                <div class="text-center">
+                    <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-outline-primary btn-sm">Details</a>
+                    @if (await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .btn-sm {
+            padding: .25rem .5rem; /* Adjust padding to control size */
+            font-size: .875rem; /* Ensure font size is consistent */
+            line-height: 1.5; /* Adjust line height for text alignment */
+            border-radius: .2rem; /* Match border-radius for aesthetic consistency */
+        }
+    </style>
+}

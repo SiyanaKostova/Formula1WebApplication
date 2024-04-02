@@ -24,24 +24,7 @@
 
     @foreach (var eventItem in Model.Events)
     {
-        <div class="card mb-3 event-card">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src="@eventItem.ImageUrl" class="card-img" alt="Event Image" style="max-height: 200px; object-fit: cover;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">@eventItem.Name</h5>
-                        <p class="card-text">@eventItem.Description</p>
-                        <p class="card-text"><small class="text-muted">@eventItem.Location</small></p>
-                        <p class="card-text"><small class="text-muted">@eventItem.Date.ToString("MMMM dd, yyyy")</small></p>
-                        <div class="text-center">
-                            <a href="@Url.Action("Details", new { id = eventItem.Id })" class="btn btn-outline-primary btn-sm">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <partial name="_EventPartial" model="@eventItem" />
     }
 
     <nav aria-label="Page navigation">
@@ -58,6 +41,7 @@
 
 @section Styles {
     <style>
+
         .btn-outline-primary {
             color: #fff !important; 
             background-color: #007bff !important; 
