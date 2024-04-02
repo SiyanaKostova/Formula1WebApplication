@@ -32,6 +32,12 @@ namespace Formula1WebApplication.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int eventId)
+        {
+            await repository.DeleteAsync<Event>(eventId);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task EditAsync(int eventId, EventServiceModel model)
         {
             var eventToEdit = await repository.GetByIdAsync<Event>(eventId);

@@ -1,5 +1,4 @@
 ﻿using Formula1WebApplication.Core.Models.Event;
-using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Infrastructure.Pagination;
 
 namespace Formula1WebApplication.Core.Contracts
@@ -19,5 +18,7 @@ namespace Formula1WebApplication.Core.Contracts
         Task<bool> HasOrganizerWithIdAsync(int eventId, string userId);
 
         Task<EventServiceModel?> GetEventServiceModelByIdAsync(int id);
+
+        Task DeleteAsync(int eventId);
     }
 }
