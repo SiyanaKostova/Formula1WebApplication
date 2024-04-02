@@ -14,23 +14,25 @@
                 <p class="card-text"><small class="text-muted">@Model.Location</small></p>
                 <p class="card-text"><small class="text-muted">@Model.Date.ToString("MMMM dd, yyyy")</small></p>
                 <div class="text-center">
-                    <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-outline-primary btn-sm uniform-btn">Details</a>
-                    @if (await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
-                    {
-                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm uniform-btn">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm uniform-btn">Delete</a>
-                    }
-                    @if (!await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()) &&
-                         !await eventService.IsJoinedByIUserWithIdAsync(Model.Id, User.Id()))
-                    {
-                        <form asp-action="Join" asp-route-id="@Model.Id" method="post">
-                            <button type="submit" class="btn btn-success btn-sm uniform-btn">Join</button>
-                        </form>
-                    }
-                    else if (await eventService.IsJoinedByIUserWithIdAsync(Model.Id, User.Id()))
-                    {
-                        <a asp-action="Leave" asp-route-id="@Model.Id" class="btn btn-warning btn-sm uniform-btn">Leave</a>
-                    }
+                    <div class="button-group" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                        <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-outline-primary btn-sm">Details</a>
+                        @if (await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm">Delete</a>
+                        }
+                        @if (!await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()) &&
+                        !await eventService.IsJoinedByIUserWithIdAsync(Model.Id, User.Id()))
+                        {
+                            <form asp-action="Join" asp-route-id="@Model.Id" method="post" style="margin: 0;">
+                                <button type="submit" class="btn btn-success btn-sm">Join</button>
+                            </form>
+                        }
+                        else if (await eventService.IsJoinedByIUserWithIdAsync(Model.Id, User.Id()))
+                        {
+                            <a asp-action="Leave" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Leave</a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
