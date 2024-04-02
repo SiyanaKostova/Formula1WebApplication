@@ -6,5 +6,6 @@
         Task<bool> IsPhoneNumberAlreadyUsedAsync(string phoneNumber);
         Task<bool> BecomeOrganizerAsync(string userId, string phoneNumber);
         Task<int?> GetOrganizerIdAsync(string userId);
+        Task<bool> ExistsByIdAsync(string userId);
     }
 }
