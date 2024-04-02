@@ -9,5 +9,6 @@ namespace Formula1WebApplication.Core.Contracts
                                                                  int pageSize,
                                                                  string searchString,
                                                                  string sortOrder);
+        Task<EventServiceModel> GetDetailsAsync(int eventId);
     }
 }

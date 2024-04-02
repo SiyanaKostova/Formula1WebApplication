@@ -55,5 +55,23 @@ namespace Formula1WebApplication.Core.Services
 
             return new PaginatedList<EventServiceModel>(items, count, pageIndex, pageSize);
         }
+
+        public async Task<EventServiceModel> GetDetailsAsync(int eventId)
+        {
+            var eventDetails = await repository.AllReadOnly<Event>()
+                .Where(e => e.Id == eventId)
+                .Select(e => new EventServiceModel
+                {
+                    Id = e.Id,
+                    ImageUrl = e.ImageUrl,
+                    Date = e.Date,
+                    Description = e.Description,
+                    Location = e.Location,
+                    Name = e.Name
+                })
+                .FirstOrDefaultAsync();
+
+            return eventDetails;
+        }
     }
 }
