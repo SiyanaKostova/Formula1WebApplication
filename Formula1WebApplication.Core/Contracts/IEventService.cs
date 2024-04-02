@@ -1,4 +1,5 @@
 ﻿using Formula1WebApplication.Core.Models.Event;
+using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Infrastructure.Pagination;
 
 namespace Formula1WebApplication.Core.Contracts
@@ -10,5 +11,7 @@ namespace Formula1WebApplication.Core.Contracts
                                                                  string searchString,
                                                                  string sortOrder);
         Task<EventServiceModel> GetDetailsAsync(int eventId);
+
+        Task AddAsync(EventServiceModel model, int organizerId);
     }
 }

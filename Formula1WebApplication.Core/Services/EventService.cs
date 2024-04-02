@@ -16,6 +16,22 @@ namespace Formula1WebApplication.Core.Services
             repository = _repository;
         }
 
+        public async Task AddAsync(EventServiceModel model, int organizerId)
+        {
+            var eventToAdd = new Event
+            {
+                Name = model.Name,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Location = model.Location,
+                OrganizerId = organizerId,
+                Date = model.Date
+            };
+
+            await repository.AddAsync(eventToAdd);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<PaginatedList<EventServiceModel>> GetAllEventsAsync(int pageIndex, int pageSize, string searchString, string sortOrder)
         {
             var query = repository.All<Event>()
