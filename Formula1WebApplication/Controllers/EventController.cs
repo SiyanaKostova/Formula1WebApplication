@@ -44,14 +44,9 @@ namespace Formula1WebApplication.Controllers
 		{
             var userId = User.Id();
 
-            IEnumerable<EventServiceModel> model;
+            var events = await eventService.GetMyEventsAsync(userId);
 
-            if (await organizerService.ExistsByIdAsync(userId))
-            {
-
-            }
-
-            return View();
+            return View(events);
 		}
 
 		[HttpGet]
