@@ -12,5 +12,11 @@ namespace Formula1WebApplication.Core.Contracts
         Task<RaceServiceModel> GetDetailsAsync(int raceId);
 
         Task AddAsync(RaceServiceModel model, int organizerId);
+
+        Task EditAsync(int raceId, RaceServiceModel model);
+
+        Task<bool> HasOrganizerWithIdAsync(int raceId, string userId);
+
+        Task<RaceServiceModel?> GetRaceServiceModelByIdAsync(int id);
     }
 }

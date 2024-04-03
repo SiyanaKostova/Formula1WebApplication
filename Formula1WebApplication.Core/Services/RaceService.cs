@@ -1,5 +1,6 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Models.Event;
+using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Core.Models.Race;
 using Formula1WebApplication.Infrastructure.Common;
 using Formula1WebApplication.Infrastructure.Data.Models;
@@ -33,6 +34,23 @@ namespace Formula1WebApplication.Core.Services
 
             await repository.AddAsync(raceToAdd);
             await repository.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(int raceId, RaceServiceModel model)
+        {
+            var race = await repository.GetByIdAsync<Race>(raceId);
+
+            if (race != null)
+            {
+                race.Name = model.Name;
+                race.CircuitInfo = model.CircuitInfo;
+                race.Date = model.Date;
+                race.Location = model.Location;
+                race.Laps = model.Laps;
+                race.ImageUrl = model.ImageUrl;
+
+                await repository.SaveChangesAsync();
+            }
         }
 
         public async Task<PaginatedList<RaceServiceModel>> GetAllRacesAsync(string searchString, string sortOrder, int pageIndex, int pageSize)
@@ -102,6 +120,31 @@ namespace Formula1WebApplication.Core.Services
                 .FirstOrDefaultAsync();
 
             return raceDetails;
+        }
+
+        public async Task<RaceServiceModel?> GetRaceServiceModelByIdAsync(int id)
+        {
+            var race = await repository.AllReadOnly<Race>()
+                           .Where(r => r.Id == id)
+                            .Select(r => new RaceServiceModel
+                            {
+                                Id = r.Id,
+                                Laps = r.Laps,
+                                Name = r.Name,
+                                Location = r.Location,
+                                Date = r.Date,
+                                ImageUrl = r.ImageUrl,
+                                CircuitInfo = r.CircuitInfo
+                            })
+                            .FirstOrDefaultAsync();
+
+            return race;
+        }
+
+        public async Task<bool> HasOrganizerWithIdAsync(int raceId, string userId)
+        {
+            return await repository.AllReadOnly<Race>()
+                            .AnyAsync(r => r.Id == raceId && r.Organizer.UserId == userId);
         }
     }
 }
