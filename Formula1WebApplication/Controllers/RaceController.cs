@@ -2,6 +2,7 @@
 using Formula1WebApplication.Core.Models.Race;
 using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Formula1WebApplication.Controllers
 {
@@ -61,8 +62,22 @@ namespace Formula1WebApplication.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Add(RaceServiceModel model)
 		{
-			return RedirectToAction(nameof(Details), new { id = 1 });
-		}
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var organizerId = await organizerService.GetOrganizerIdAsync(User.Id());
+
+            if (organizerId == null)
+            {
+                return NotFound();
+            }
+
+            await raceService.AddAsync(model, organizerId.Value);
+
+            return RedirectToAction(nameof(All));
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
