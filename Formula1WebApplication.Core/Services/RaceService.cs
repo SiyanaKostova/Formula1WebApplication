@@ -1,9 +1,11 @@
 ﻿using Formula1WebApplication.Core.Contracts;
+using Formula1WebApplication.Core.Models.Event;
 using Formula1WebApplication.Core.Models.Race;
 using Formula1WebApplication.Infrastructure.Common;
 using Formula1WebApplication.Infrastructure.Data.Models;
 using Formula1WebApplication.Infrastructure.Pagination;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Formula1WebApplication.Core.Services
 {
@@ -64,6 +66,25 @@ namespace Formula1WebApplication.Core.Services
                 .ToListAsync();
 
             return new PaginatedList<RaceServiceModel>(items, count, pageIndex, pageSize);
+        }
+
+        public async Task<RaceServiceModel> GetDetailsAsync(int raceId)
+        {
+            var raceDetails = await repository.AllReadOnly<Race>()
+                .Where(r => r.Id == raceId)
+                .Select(r => new RaceServiceModel
+                {
+                    Id = r.Id,
+                    Laps = r.Laps,
+                    Name = r.Name,
+                    Location = r.Location,
+                    Date = r.Date,
+                    ImageUrl = r.ImageUrl,
+                    CircuitInfo = r.CircuitInfo
+                })
+                .FirstOrDefaultAsync();
+
+            return raceDetails;
         }
     }
 }
