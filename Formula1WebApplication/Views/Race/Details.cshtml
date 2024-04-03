@@ -1,8 +1,53 @@
 ﻿@model RaceServiceModel
 
 @{
-    ViewBag.Title = "Race Details";
+    ViewData["Title"] = "Race Details";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="race-details-container">
+    <div class="race-image">
+        <img src="@Model.ImageUrl" alt="Image of @Model.Name" class="img-fluid">
+    </div>
+
+    <h3>@Model.Name</h3>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Date:</strong> @Model.Date.ToString("dddd, MMMM dd, yyyy")</p>
+    <p><strong>Laps:</strong> @Model.Laps</p>
+    <p><strong>Circuit Information:</strong> @Model.CircuitInfo</p>
+
+    <a href="@Url.Action("All", "Race")" class="btn btn-primary back-to-all">Back to All Races</a>
+</div>
+
+@section Styles {
+    <style>
+        .race-details-container {
+            text-align: center;
+            margin: auto;
+            padding: 2rem;
+            max-width: 600px;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            background-color: #f9f9f9;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .race-details-container:hover {
+                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            }
+
+        .race-image img {
+            margin-bottom: 1rem;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        .back-to-all {
+            display: inline-block;
+            margin-top: 2rem;
+        }
+    </style>
+}
