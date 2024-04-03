@@ -1,17 +1,40 @@
-﻿using Formula1WebApplication.Core.Models.Race;
+﻿using Formula1WebApplication.Core.Contracts;
+using Formula1WebApplication.Core.Models.Race;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Formula1WebApplication.Controllers
 {
     public class RaceController : BaseController
 	{
-		[HttpGet]
-		public async Task<IActionResult> All()
-        {
-			var model = new AllRacesQueryModel();
+        private readonly IRaceService raceService;
+        private readonly IOrganizerService organizerService;
 
-			return View(model);
-		}
+        public RaceController(
+            IRaceService _raceService,
+            IOrganizerService _organizerService)
+        {
+            raceService = _raceService;
+            organizerService = _organizerService;
+        }
+
+        [HttpGet]
+		public async Task<IActionResult> All(string searchString, string sortOrder, int pageIndex = 1)
+        {
+            const int pageSize = 2
+                ;
+            var races = await raceService.GetAllRacesAsync(searchString, sortOrder, pageIndex, pageSize);
+
+            var model = new AllRacesQueryModel
+            {
+                Races = races,
+                SearchString = searchString,
+                SortOrder = sortOrder,
+                PageIndex = pageIndex,
+                TotalPages = races.TotalPages
+            };
+
+            return View(model);
+        }
 
 		[HttpGet]
 		public async Task<IActionResult> Mine()
