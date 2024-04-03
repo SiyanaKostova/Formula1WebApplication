@@ -1,8 +1,32 @@
 ﻿@model RaceServiceModel
 
 @{
-    ViewBag.Title = "Delete Race";
+    ViewData["Title"] = "Confirm Delete";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="container text-center" style="max-width: 500px;">
+    <h4>Are you sure you want to delete this race?</h4>
+    <div class="alert alert-warning" role="alert">
+        <p><strong>Name:</strong> @Model.Name</p>
+        <p><strong>Location:</strong> @Model.Location</p>
+        <p><strong>Date:</strong> @Model.Date.ToString("dddd, MMMM dd, yyyy")</p>
+        <p><strong>Laps:</strong> @Model.Laps</p>
+        <p><strong>Circuit Info:</strong> @Model.CircuitInfo</p>
+    </div>
+    <h4>This action cannot be undone.</h4>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("All")" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
