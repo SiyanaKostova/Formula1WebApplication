@@ -1,6 +1,5 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Models.Race;
-using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -114,7 +113,23 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var model = new RaceServiceModel();
+            if (await raceService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            var race = await raceService.GetDetailsAsync(id);
+
+            var model = new RaceServiceModel()
+            {
+                Id = id,
+                Name = race.Name,
+                CircuitInfo = race.CircuitInfo,
+                Laps = race.Laps,
+                Location = race.Location,
+                Date = race.Date,
+                ImageUrl = race.ImageUrl
+            };
 
             return View(model);
         }
@@ -122,6 +137,13 @@ namespace Formula1WebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(RaceServiceModel model)
         {
+            if (await raceService.HasOrganizerWithIdAsync(model.Id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            await raceService.DeleteAsync(model.Id);
+
             return RedirectToAction(nameof(All));
         }
     }
