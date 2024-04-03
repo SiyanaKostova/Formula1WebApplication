@@ -1,8 +1,103 @@
 ﻿@model AllRacesQueryModel
 
 @{
-	ViewBag.Title = "All Races";
+    ViewData["Title"] = "All Races";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="container" style="max-width: 1000px;">
+    <div class="row mb-3">
+        <div class="col">
+            <form asp-action="All" method="get" class="form-inline justify-content-center">
+                <input type="text" name="searchString" value="@Model.SearchString" class="form-control mr-2" placeholder="Search by name or location..." />
+                <button type="submit" class="btn btn-outline-info">Search</button>
+
+            </form>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col text-center">
+            <a asp-action="All" asp-route-sortOrder="name" class="btn sort-button">Name A-Z</a>
+            <a asp-action="All" asp-route-sortOrder="name_desc" class="btn sort-button">Name Z-A</a>
+            <a asp-action="All" asp-route-sortOrder="laps" class="btn sort-button">Laps Ascending</a>
+            <a asp-action="All" asp-route-sortOrder="laps_desc" class="btn sort-button">Laps Descending</a>
+            <a asp-action="All" asp-route-sortOrder="newest" class="btn sort-button">Newest</a>
+        </div>
+    </div>
+
+    @foreach (var race in Model.Races)
+    {
+        <div class="card mb-3 race-card">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="@race.ImageUrl" class="card-img" alt="@race.Name" style="height: 200px; object-fit: cover;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@race.Name</h5>
+                        <p class="card-text"><strong>Location:</strong> @race.Location</p>
+                        <p class="card-text"><strong>Laps:</strong> @race.Laps</p>
+                        <p class="card-text"><strong>Date:</strong> @race.Date.ToString("MMMM dd, yyyy")</p>
+                        <p class="card-text"><strong>Circuit Info:</strong> @race.CircuitInfo</p>
+                        <div class="text-center">
+                            <a asp-action="Details" asp-route-id="@race.Id" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <nav aria-label="Race navigation" class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                <a class="page-link" href="?pageIndex=@(Model.PageIndex - 1)&searchString=@Model.SearchString&sortOrder=@Model.SortOrder">Previous</a>
+            </li>
+            <li class="page-item @(Model.PageIndex >= Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="?pageIndex=@(Model.PageIndex + 1)&searchString=@Model.SearchString&sortOrder=@Model.SortOrder">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+@section Styles {
+    <style>
+
+        .sort-button {
+            margin: 0 5px;
+            color: #007bff;
+            border-color: #007bff;
+        }
+
+            .sort-button:hover {
+                background-color: #0056b3;
+                color: white;
+            }
+
+        .race-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,.2);
+            transform: scale(1.02);
+            transition: all .2s ease-in-out;
+        }
+
+        .card-img {
+            width: 100%;
+            border-top-left-radius: calc(.25rem - 1px);
+            border-bottom-left-radius: calc(.25rem - 1px);
+        }
+
+        .pagination .page-link {
+            color: #007bff;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+    </style>
+}
