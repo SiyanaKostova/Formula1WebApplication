@@ -34,6 +34,16 @@ namespace Formula1WebApplication.Core.Services
 
         public async Task DeleteAsync(int eventId)
         {
+            var eventUsers = repository.All<EventUser>().Where(eu => eu.EventId == eventId).ToList();
+
+            if (eventUsers.Any())
+            {
+                foreach (var eventUser in eventUsers)
+                {
+                    repository.Remove(eventUser);
+                }
+            }
+
             await repository.DeleteAsync<Event>(eventId);
             await repository.SaveChangesAsync();
         }
