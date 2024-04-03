@@ -18,6 +18,23 @@ namespace Formula1WebApplication.Core.Services
             repository = _repository;
         }
 
+        public async Task AddAsync(RaceServiceModel model, int organizerId)
+        {
+            var raceToAdd = new Race
+            {
+                Name = model.Name,
+                CircuitInfo = model.CircuitInfo,
+                Date = model.Date,
+                Location = model.Location,
+                Laps = model.Laps,
+                ImageUrl = model.ImageUrl,
+                OrganizerId = organizerId
+            };
+
+            await repository.AddAsync(raceToAdd);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<PaginatedList<RaceServiceModel>> GetAllRacesAsync(string searchString, string sortOrder, int pageIndex, int pageSize)
         {
             var racesQuery = repository.All<Race>().AsQueryable();
