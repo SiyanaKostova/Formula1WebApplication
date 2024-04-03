@@ -24,7 +24,7 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Details()
         {
-            var model = new RaceDetailsServiceModel();
+            var model = new RaceServiceModel();
 
             return View(model);
         }
@@ -32,13 +32,13 @@ namespace Formula1WebApplication.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Add()
 		{
-			var model = new RaceFormModel();
+			var model = new RaceServiceModel();
 
 			return View(model);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Add(RaceFormModel model)
+		public async Task<IActionResult> Add(RaceServiceModel model)
 		{
 			return RedirectToAction(nameof(Details), new { id = 1 });
 		}
@@ -46,13 +46,13 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new RaceFormModel();
+            var model = new RaceServiceModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, RaceFormModel model)
+        public async Task<IActionResult> Edit(int id, RaceServiceModel model)
         {
             return RedirectToAction(nameof(Details), new { id = 1 });
         }
@@ -60,13 +60,13 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var model = new RaceFormModel();
+            var model = new RaceServiceModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(RaceDetailsViewModel model)
+        public async Task<IActionResult> Delete(RaceServiceModel model)
         {
             return RedirectToAction(nameof(All));
         }
