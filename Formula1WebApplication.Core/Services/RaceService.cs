@@ -1,12 +1,9 @@
 ﻿using Formula1WebApplication.Core.Contracts;
-using Formula1WebApplication.Core.Models.Event;
-using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Core.Models.Race;
 using Formula1WebApplication.Infrastructure.Common;
 using Formula1WebApplication.Infrastructure.Data.Models;
 using Formula1WebApplication.Infrastructure.Pagination;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Formula1WebApplication.Core.Services
 {
@@ -33,6 +30,12 @@ namespace Formula1WebApplication.Core.Services
             };
 
             await repository.AddAsync(raceToAdd);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int raceId)
+        {
+            await repository.DeleteAsync<Race>(raceId);
             await repository.SaveChangesAsync();
         }
 
