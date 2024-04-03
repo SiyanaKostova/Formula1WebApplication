@@ -29,25 +29,7 @@
 
     @foreach (var race in Model.Races)
     {
-        <div class="card mb-3 race-card">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src="@race.ImageUrl" class="card-img" alt="@race.Name" style="height: 200px; object-fit: cover;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">@race.Name</h5>
-                        <p class="card-text"><strong>Location:</strong> @race.Location</p>
-                        <p class="card-text"><strong>Laps:</strong> @race.Laps</p>
-                        <p class="card-text"><strong>Date:</strong> @race.Date.ToString("MMMM dd, yyyy")</p>
-                        <p class="card-text"><strong>Circuit Info:</strong> @race.CircuitInfo</p>
-                        <div class="text-center">
-                            <a asp-action="Details" asp-route-id="@race.Id" class="btn btn-primary">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <partial name="_RacePartial" model="@race" />
     }
 
     <nav aria-label="Race navigation" class="d-flex justify-content-center">

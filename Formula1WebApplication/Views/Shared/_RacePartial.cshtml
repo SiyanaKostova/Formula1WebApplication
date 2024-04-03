@@ -1,0 +1,28 @@
+﻿@model RaceServiceModel
+@inject IRaceService raceService
+
+<div class="race-item">
+    <div class="card mb-3 race-card">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="@Model.ImageUrl" class="card-img" alt="@Model.Name" style="height: 200px; object-fit: cover;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text"><strong>Location:</strong> @Model.Location</p>
+                    <p class="card-text"><strong>Laps:</strong> @Model.Laps</p>
+                    <p class="card-text"><strong>Date:</strong> @Model.Date.ToString("MMMM dd, yyyy")</p>
+                    <p class="card-text"><strong>Circuit Info:</strong> @Model.CircuitInfo</p>
+                    <div class="text-center race-actions">
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+                        @if (await raceService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
