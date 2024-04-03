@@ -82,7 +82,12 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new RaceServiceModel();
+            if (await raceService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = await raceService.GetRaceServiceModelByIdAsync(id);
 
             return View(model);
         }
@@ -90,7 +95,20 @@ namespace Formula1WebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, RaceServiceModel model)
         {
-            return RedirectToAction(nameof(Details), new { id = 1 });
+            if (await raceService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            {
+                return Unauthorized();
+            }
+
+
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+
+            await raceService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
