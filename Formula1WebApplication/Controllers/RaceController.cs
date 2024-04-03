@@ -1,5 +1,6 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Models.Race;
+using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Formula1WebApplication.Controllers
@@ -36,20 +37,17 @@ namespace Formula1WebApplication.Controllers
             return View(model);
         }
 
-		[HttpGet]
-		public async Task<IActionResult> Mine()
-        {
-            var model = new AllRacesQueryModel();
-
-            return View(model);
-        }
-
         [HttpGet]
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int id)
         {
-            var model = new RaceServiceModel();
+            var raceDetails = await raceService.GetDetailsAsync(id);
 
-            return View(model);
+            if (raceDetails == null)
+            {
+                return NotFound();
+            }
+
+            return View(raceDetails);
         }
 
 		[HttpGet]
@@ -92,18 +90,6 @@ namespace Formula1WebApplication.Controllers
         public async Task<IActionResult> Delete(RaceServiceModel model)
         {
             return RedirectToAction(nameof(All));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Join(int id)
-        {
-            return RedirectToAction(nameof(Mine));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Leave(int id)
-        {
-            return RedirectToAction(nameof(Mine));
         }
     }
 }
