@@ -1,7 +1,60 @@
 ﻿@model RaceServiceModel
+
 @{
-	ViewBag.Title = "Add Race";
+    ViewData["Title"] = "Add Race";
+    Model.Date = Model.Date.Year == 1 ? new DateTime(2024, 1, 1) : Model.Date;
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="container" style="max-width: 600px;">
+    @using (Html.BeginForm("Add", "Race", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Location" class="control-label"></label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Date" class="control-label"></label>
+            <input asp-for="Date" class="form-control" type="datetime-local" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Laps" class="control-label"></label>
+            <input asp-for="Laps" class="form-control" type="number" />
+            <span asp-validation-for="Laps" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CircuitInfo" class="control-label"></label>
+            <textarea asp-for="CircuitInfo" class="form-control"></textarea>
+            <span asp-validation-for="CircuitInfo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ImageUrl" class="control-label">Image URL</label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="form-group text-center" style="margin-top: 20px;">
+            <button type="submit" class="btn btn-primary">Add Race</button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
