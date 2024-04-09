@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Formula1WebApplication.Core.Contracts.InterfaceModels;
+using System.ComponentModel.DataAnnotations;
 using static Formula1WebApplication.Core.Constants.MessageConstants;
 using static Formula1WebApplication.Infrastructure.Constants.DataConstants;
 
 namespace Formula1WebApplication.Core.Models.Event
 {
-    public class EventServiceModel
+    public class EventServiceModel : IEventModel
     {
         public int Id { get; set; }
 
