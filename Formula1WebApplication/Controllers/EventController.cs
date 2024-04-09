@@ -1,9 +1,11 @@
 ﻿using Formula1WebApplication.Core.Contracts;
+using Formula1WebApplication.Core.Extensions;
 using Formula1WebApplication.Core.Models.Event;
 using Formula1WebApplication.Core.Models.NewsArticle;
 using Formula1WebApplication.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Security.Claims;
 
 namespace Formula1WebApplication.Controllers
@@ -51,11 +53,16 @@ namespace Formula1WebApplication.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Details(int id, string information)
 		{
 			var eventDetails = await eventService.GetDetailsAsync(id);
 
-			if (eventDetails == null)
+            if (information != eventDetails.GetEventDetails())
+            {
+                return BadRequest();
+            }
+
+            if (eventDetails == null)
 			{
 				return NotFound();
 			}
@@ -112,7 +119,6 @@ namespace Formula1WebApplication.Controllers
                 return Unauthorized();
             }
 
-
             if (ModelState.IsValid == false)
             {
                 return View(model);
@@ -120,7 +126,7 @@ namespace Formula1WebApplication.Controllers
 
             await eventService.EditAsync(id, model);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id, information = model.GetEventDetails() });
         }
 
 		[HttpGet]
