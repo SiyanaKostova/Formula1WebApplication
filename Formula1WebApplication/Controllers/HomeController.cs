@@ -1,8 +1,6 @@
 ﻿using Formula1WebApplication.Core.Contracts;
-using Formula1WebApplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Formula1WebApplication.Controllers
 {
@@ -27,10 +25,21 @@ namespace Formula1WebApplication.Controllers
             return View(model);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		[AllowAnonymous]
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error(int statusCode)
+		{
+			if (statusCode == 404)
+			{
+				return View("Error404");
+			}
+
+			if (statusCode == 500)
+			{
+				return View("Error500");
+			}
+
+			return View();
+		}
+	}
 }
