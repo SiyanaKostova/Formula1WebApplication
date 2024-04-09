@@ -1,4 +1,5 @@
 ﻿using Formula1WebApplication.Core.Contracts.InterfaceModels;
+using Formula1WebApplication.Infrastructure.Data.Models;
 using System.Text.RegularExpressions;
 
 namespace Formula1WebApplication.Core.Extensions
@@ -25,7 +26,17 @@ namespace Formula1WebApplication.Core.Extensions
             return info;
         }
 
-        private static string GetDescription(string  description)
+        public static string GetRaceDetails(this IRaceModel race)
+        {
+            string info = race.Name.Replace(" ", "-")
+                + GetDescription(race.CircuitInfo);
+
+            info = Regex.Replace(info, @"[^a-zA-Z0-9\-]", string.Empty);
+
+            return info;
+        }
+
+        private static string GetDescription(string description)
         {
             description = string.Join("-", description.Split(" ").Take(3));
 
