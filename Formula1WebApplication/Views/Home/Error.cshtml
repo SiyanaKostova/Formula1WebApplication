@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Error";
+}
+
+<div style="text-align: center; margin-top: 50px;">
+    <img src="https://us.123rf.com/450wm/sanek13744/sanek137442310/sanek13744231000137/222059894-error-message-icon-in-flat-style-computer-window-alert-vector-illustration-on-isolated-background.jpg?ver=6"
+         alt="Error Icon"
+         style="max-width: 300px; margin-bottom: 30px;">
+
+    <h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">An error occurred while processing your request.</h2>
+    <br />
+    <p>
+        <a href="@Url.Action("Index", "Home")"
+           style="display: inline-block; text-decoration: none; color: white; background-color: #007bff; padding: 10px 20px; border-radius: 5px; transition: background-color 0.2s;">
+            Go back to the homepage
+        </a>
+    </p>
+</div>

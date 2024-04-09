@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Error 500 - Internal Server Error";
+}
+
+<div style="text-align: center; margin-top: 50px;">
+    <img src="https://ginbits.com/wp-content/uploads/2021/08/How-to-Fix-500-Internal-Server-Error.png"
+         alt="Error 500 - Internal Server Error"
+         style="max-width: 100%; height: auto; margin-bottom: 30px;">
+
+    <h1 class="text-danger">500 Internal Server Error</h1>
+    <h2>Sorry, something went wrong on our end.</h2>
+    <p>Please try again later or contact support if the problem persists.</p>
+    <br />
+    <p>
+        <a href="@Url.Action("Index", "Home")"
+           style="display: inline-block; text-decoration: none; color: white; background-color: #dc3545; padding: 10px 20px; border-radius: 5px; transition: background-color 0.2s;">
+            Return to the homepage
+        </a>
+    </p>
+</div>
