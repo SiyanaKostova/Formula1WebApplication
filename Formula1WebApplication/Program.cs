@@ -40,6 +40,12 @@ app.UseEndpoints(endpoints =>
         defaults: new { Controller = "NewsArticle", Action = "Details" }
     );
 
+    endpoints.MapControllerRoute(
+    name: "Event Details",
+    pattern: "/Event/Details/{id}/{information}",
+    defaults: new { Controller = "Event", Action = "Details" }
+);
+
     endpoints.MapDefaultControllerRoute();
     endpoints.MapRazorPages();
 });
