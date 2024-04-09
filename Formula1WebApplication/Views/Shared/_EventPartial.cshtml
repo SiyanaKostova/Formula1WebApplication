@@ -15,7 +15,7 @@
                 <p class="card-text"><small class="text-muted">@Model.Date.ToString("MMMM dd, yyyy")</small></p>
                 <div class="text-center">
                     <div class="button-group" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-                        <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-outline-primary btn-sm">Details</a>
+                        <a asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetEventDetails()" class="btn btn-outline-primary btn-sm">Details</a>
                         @if (await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
                         {
                             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm">Edit</a>
