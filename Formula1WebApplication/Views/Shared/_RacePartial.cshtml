@@ -15,7 +15,7 @@
                     <p class="card-text"><strong>Date:</strong> @Model.Date.ToString("MMMM dd, yyyy")</p>
                     <p class="card-text"><strong>Circuit Info:</strong> @Model.CircuitInfo</p>
                     <div class="text-center race-actions">
-                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+                        <a asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetRaceDetails()" class="btn btn-primary">Details</a>
                         @if (await raceService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
                         {
                             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
