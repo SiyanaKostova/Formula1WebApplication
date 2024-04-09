@@ -1,4 +1,5 @@
 ﻿using Formula1WebApplication.Core.Contracts;
+using Formula1WebApplication.Core.Extensions;
 using Formula1WebApplication.Core.Models.Race;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -38,9 +39,14 @@ namespace Formula1WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             var raceDetails = await raceService.GetDetailsAsync(id);
+
+            if (information != raceDetails.GetRaceDetails())
+            {
+                return BadRequest();
+            }
 
             if (raceDetails == null)
             {
@@ -107,7 +113,7 @@ namespace Formula1WebApplication.Controllers
 
             await raceService.EditAsync(id, model);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id, information = model.GetRaceDetails() });
         }
 
         [HttpGet]
