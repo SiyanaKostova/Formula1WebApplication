@@ -4,7 +4,7 @@ using static Formula1WebApplication.Infrastructure.Constants.DataConstants;
 
 namespace Formula1WebApplication.Core.Models.Pilot
 {
-    public class PilotDetailsServiceModel
+    public class PilotDetailsServiceModel 
     {
         public int Id { get; set; }
 
