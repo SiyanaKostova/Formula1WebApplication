@@ -1,4 +1,5 @@
 ﻿using Formula1WebApplication.Core.Contracts;
+using Formula1WebApplication.Core.Extensions;
 using Formula1WebApplication.Core.Models.NewsArticle;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,9 +37,14 @@ namespace Formula1WebApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             var articleDetails = await newsArticleService.GetDetailsAsync(id);
+
+            if (information != articleDetails.GetNewsArticleDetails())
+            {
+                return BadRequest();
+            }
 
             if (articleDetails == null)
             {
@@ -104,7 +110,7 @@ namespace Formula1WebApplication.Controllers
 
             await newsArticleService.EditAsync(id, model);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new {id, information = model.GetNewsArticleDetails() });
         }
 
         [HttpGet]
