@@ -32,6 +32,18 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "NewsArticle Details",
+        pattern: "/NewsArticle/Details/{id}/{information}",
+        defaults: new { Controller = "NewsArticle", Action = "Details" }
+    );
+
+    endpoints.MapDefaultControllerRoute();
+    endpoints.MapRazorPages();
+});
+
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
