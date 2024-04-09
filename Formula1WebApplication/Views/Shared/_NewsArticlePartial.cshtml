@@ -6,7 +6,7 @@
     <div class="col-md-8">
         <h5>@Model.Title</h5>
         <p>@Model.Description</p>
-        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+        <a asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetNewsArticleDetails()" class="btn btn-primary">Details</a>
         @if (await newsArticleService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
         {
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
