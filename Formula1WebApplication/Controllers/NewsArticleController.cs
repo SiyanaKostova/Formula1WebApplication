@@ -85,7 +85,8 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false
+                && User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -98,7 +99,8 @@ namespace Formula1WebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, NewsArticleServiceModel model)
         {
-            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -116,7 +118,8 @@ namespace Formula1WebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false)
+            if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false
+				&& User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
@@ -137,7 +140,8 @@ namespace Formula1WebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(NewsArticleServiceModel model)
         {
-            if (await newsArticleService.HasOrganizerWithIdAsync(model.Id, User.Id()) == false)
+            if (await newsArticleService.HasOrganizerWithIdAsync(model.Id, User.Id()) == false
+				&& User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
