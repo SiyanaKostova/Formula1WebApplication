@@ -2,11 +2,10 @@
 using Formula1WebApplication.Infrastructure.Data.SeedDb.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace Formula1WebApplication.Infrastructure.Data
 {
-    public class FormulaOneDbContext : IdentityDbContext
+    public class FormulaOneDbContext : IdentityDbContext<ApplicationUser>
     {
         public FormulaOneDbContext(DbContextOptions<FormulaOneDbContext> options)
             : base(options)
@@ -39,6 +38,6 @@ namespace Formula1WebApplication.Infrastructure.Data
         public DbSet<Race> Races { get; set; } = null!;
         public DbSet<Event> Events { get; set; } = null!;
         public DbSet<NewsArticle> NewsArticles { get; set; } = null!;
-        public DbSet<EventUser> EventsUsers { get; set; }
+        public DbSet<EventUser> EventsUsers { get; set; } = null!;
     }
 }
