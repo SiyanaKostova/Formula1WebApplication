@@ -26,5 +26,10 @@
         public const int NewsArticleTitleMaxLength = 50;
         public const int NewsArticleDescriptionMinLength = 30;
         public const int NewsArticleDescriptionMaxLength = 2000;
+
+        public const int UserFirstNameMaxLength = 20;
+        public const int UserFirstNameMinLength = 1;
+        public const int UserLastNameMaxLength = 20;
+        public const int UserLastNameMinLength = 3;
     }
 }
