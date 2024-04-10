@@ -29,6 +29,7 @@ namespace Formula1WebApplication.Infrastructure.Data
             builder.ApplyConfiguration(new RaceConfiguration());
             builder.ApplyConfiguration(new EventConfiguration());
             builder.ApplyConfiguration(new NewsArticleConfiguration());
+            builder.ApplyConfiguration(new UserClaimsConfiguration());
 
             base.OnModelCreating(builder);
         }
