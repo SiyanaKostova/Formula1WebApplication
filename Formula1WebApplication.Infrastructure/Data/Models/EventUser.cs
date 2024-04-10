@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Formula1WebApplication.Infrastructure.Data.Models
 {
-    public class EventUser
+	public class EventUser
     {
         [Comment("Event Id")]
         public int EventId { get; set; }
@@ -16,6 +15,6 @@ namespace Formula1WebApplication.Infrastructure.Data.Models
         public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
     }
 }
