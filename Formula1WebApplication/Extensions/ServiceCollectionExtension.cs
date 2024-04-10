@@ -2,7 +2,7 @@
 using Formula1WebApplication.Core.Services;
 using Formula1WebApplication.Infrastructure.Common;
 using Formula1WebApplication.Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
+using Formula1WebApplication.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -35,7 +35,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = true;
