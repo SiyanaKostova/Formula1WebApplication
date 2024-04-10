@@ -1,3 +1,4 @@
+using Formula1WebApplication.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,5 +61,7 @@ app.UseEndpoints(endpoints =>
 
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
+
+await app.CreateAdminRoleAsync();
 
 await app.RunAsync();
