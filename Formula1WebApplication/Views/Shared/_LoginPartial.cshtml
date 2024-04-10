@@ -8,8 +8,7 @@
 
 	if (SignInManager.IsSignedIn(User))
 	{
-		var user = await UserManager.FindByIdAsync(User.Id());
-		username = $"{user.FirstName} {user.LastName}";
+		username = User.FindFirstValue(Formula1WebApplication.Infrastructure.Constants.CustomClaims.UserFullNameClaim) ?? string.Empty;
 	}
 }
 
