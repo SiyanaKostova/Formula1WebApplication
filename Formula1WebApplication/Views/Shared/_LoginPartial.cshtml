@@ -3,6 +3,16 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject IOrganizerService organizerService
 
+@{
+	string username = string.Empty;
+
+	if (SignInManager.IsSignedIn(User))
+	{
+		var user = await UserManager.FindByIdAsync(User.Id());
+		username = $"{user.FirstName} {user.LastName}";
+	}
+}
+
 <ul class="navbar-nav">
 	@if (SignInManager.IsSignedIn(User))
 	{
@@ -13,7 +23,7 @@
 			</li>
 		}
 		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+			<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Let's race @username!</a>
 		</li>
 		<li class="nav-item">
 			<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
