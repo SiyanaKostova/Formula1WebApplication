@@ -3,6 +3,7 @@ using Formula1WebApplication.Core.Services;
 using Formula1WebApplication.Infrastructure.Common;
 using Formula1WebApplication.Infrastructure.Data;
 using Formula1WebApplication.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -44,6 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.Password.RequireUppercase = true;
 
             })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<FormulaOneDbContext>();
 
             return services;
