@@ -64,7 +64,7 @@ namespace Formula1WebApplication.Core.Services
             }
         }
 
-        public async Task<PaginatedList<EventServiceModel>> GetAllEventsAsync(int pageIndex, int pageSize, string searchString, string sortOrder)
+		public async Task<PaginatedList<EventServiceModel>> GetAllEventsAsync(int pageIndex, int pageSize, string searchString, string sortOrder)
         {
             var query = repository.All<Event>()
            .Select(e => new EventServiceModel

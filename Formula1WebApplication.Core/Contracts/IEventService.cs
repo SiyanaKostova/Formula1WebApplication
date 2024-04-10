@@ -28,5 +28,5 @@ namespace Formula1WebApplication.Core.Contracts
         Task<IEnumerable<EventServiceModel>> GetMyEventsAsync(string userId);
 
         Task<bool> LeaveEventAsync(int eventId, string userId);
-    }
+	}
 }
