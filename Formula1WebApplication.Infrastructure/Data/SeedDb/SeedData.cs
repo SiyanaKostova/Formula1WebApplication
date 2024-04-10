@@ -5,8 +5,8 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 {
     public class SeedData
     {
-        public IdentityUser OrganizerUser { get; set; }
-        public IdentityUser GuestUser { get; set; }
+        public ApplicationUser OrganizerUser { get; set; }
+        public ApplicationUser GuestUser { get; set; }
 
         public Organizer Organizer { get; set; }
 
@@ -55,27 +55,31 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<IdentityUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-            OrganizerUser = new IdentityUser()
+            OrganizerUser = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
                 UserName = "organizer@mail.com",
                 NormalizedUserName = "organizer@mail.com",
                 Email = "organizer@mail.com",
-                NormalizedEmail = "organizer@mail.com"
+                NormalizedEmail = "organizer@mail.com",
+                FirstName = "Organizer",
+                LastName = "Organizerov"
             };
 
             OrganizerUser.PasswordHash =
                  hasher.HashPassword(OrganizerUser, "organizer123");
 
-            GuestUser = new IdentityUser()
+            GuestUser = new ApplicationUser()
             {
                 Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 UserName = "guest@mail.com",
                 NormalizedUserName = "guest@mail.com",
                 Email = "guest@mail.com",
-                NormalizedEmail = "guest@mail.com"
+                NormalizedEmail = "guest@mail.com",
+                FirstName = "Guest",
+                LastName = "Guestov"
             };
 
             GuestUser.PasswordHash =
