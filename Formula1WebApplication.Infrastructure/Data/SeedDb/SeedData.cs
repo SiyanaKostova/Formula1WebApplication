@@ -1,16 +1,23 @@
 ﻿using Formula1WebApplication.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using static Formula1WebApplication.Infrastructure.Constants.CustomClaims;
 
 namespace Formula1WebApplication.Infrastructure.Data.SeedDb
 {
     public class SeedData
     {
-        public ApplicationUser OrganizerUser { get; set; }
+		public IdentityUserClaim<string> OrganizerUserClaim { get; set; }
+		public IdentityUserClaim<string> GuestUserClaim { get; set; }
+		public IdentityUserClaim<string> AdminUserClaim { get; set; }
+
+		public ApplicationUser OrganizerUser { get; set; }
         public ApplicationUser GuestUser { get; set; }
+		public ApplicationUser AdminUser { get; set; }
 
-        public Organizer Organizer { get; set; }
+		public Organizer Organizer { get; set; }
+		public Organizer AdminOrganizer { get; set; }
 
-        public Pilot MaxVerstappen { get; set; }
+		public Pilot MaxVerstappen { get; set; }
         public Pilot CharlesLeclerc { get; set; }
         public Pilot SergioPerez { get; set; }
         public Pilot CarlosSainz { get; set; }
@@ -68,6 +75,14 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 LastName = "Organizerov"
             };
 
+            OrganizerUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 3,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Organizer Organizerov",
+                UserId = "dea12856-c198-4129-b3f3-b893d8395082"
+			};
+
             OrganizerUser.PasswordHash =
                  hasher.HashPassword(OrganizerUser, "organizer123");
 
@@ -82,9 +97,39 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 LastName = "Guestov"
             };
 
-            GuestUser.PasswordHash =
+			GuestUserClaim = new IdentityUserClaim<string>()
+			{
+				Id = 4,
+				ClaimType = UserFullNameClaim,
+				ClaimValue = "Guest Guestov",
+				UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+			};
+
+			GuestUser.PasswordHash =
             hasher.HashPassword(OrganizerUser, "guest123");
-        }
+
+			AdminUser = new ApplicationUser()
+			{
+				Id = "eb9175e5-1e90-4a71-b89e-a1ee5d0cc9e9",
+				UserName = "admin@mail.com",
+				NormalizedUserName = "ADMIN@MAIL.COM",
+				Email = "admin@mail.com",
+				NormalizedEmail = "ADMIN@MAIL.COM",
+				FirstName = "Admin",
+				LastName = "Adminov"
+			};
+
+            AdminUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 5,
+                ClaimType = UserFullNameClaim,
+                UserId = "eb9175e5-1e90-4a71-b89e-a1ee5d0cc9e9",
+                ClaimValue = "Admin Adminov"
+            };
+
+            AdminUser.PasswordHash =
+				hasher.HashPassword(AdminUser, "admin123");
+		}
 
         private void SeedOrganizer()
         {
@@ -94,7 +139,14 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb
                 PhoneNumber = "+359123123123",
                 UserId = OrganizerUser.Id
             };
-        }
+
+			AdminOrganizer = new Organizer()
+			{
+				Id = 3,
+				PhoneNumber = "+359321321321",
+				UserId = AdminUser.Id
+			};
+		}
 
         private void SeedPilots()
         {

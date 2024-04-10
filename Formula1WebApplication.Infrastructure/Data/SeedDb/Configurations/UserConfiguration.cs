@@ -10,7 +10,7 @@ namespace Formula1WebApplication.Infrastructure.Data.SeedDb.Configurations
         {
             var data = new SeedData();
 
-            builder.HasData(new ApplicationUser[] { data.OrganizerUser, data.GuestUser });
+            builder.HasData(new ApplicationUser[] { data.OrganizerUser, data.GuestUser, data.AdminUser });
         }
     }
 }
