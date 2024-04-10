@@ -16,7 +16,8 @@
                 <div class="text-center">
                     <div class="button-group" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
                         <a asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetEventDetails()" class="btn btn-outline-primary btn-sm">Details</a>
-                        @if (await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id()))
+                        @if (await eventService.HasOrganizerWithIdAsync(Model.Id, User.Id())
+                            || User.IsAdmin())
                         {
                             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm">Edit</a>
                             <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm">Delete</a>
