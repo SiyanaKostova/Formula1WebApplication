@@ -13,6 +13,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using static Formula1WebApplication.Infrastructure.Constants.DataConstants;
+using static Formula1WebApplication.Infrastructure.Constants.CustomClaims;
 
 namespace Formula1WebApplication.Areas.Identity.Pages.Account
 {
@@ -129,6 +130,7 @@ namespace Formula1WebApplication.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim(UserFullNameClaim, $"{user.FirstName} {user.LastName}"));
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
