@@ -1,10 +1,68 @@
-﻿﻿@{
-    ViewData["Title"] = "Dashboard";
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
 }
 
-<div class="mt-4 p-5 bg-light text-center">
-    <h2 class="display-4">Hello, Admin!</h2>
-    <p class="lead mb-1 mt-3"> This is your administrator area - you can <b>read</b>, <b>create</b>, <b>delete</b> and <b>edit</b> houses. <br />You can <b>rent</b> and <b>leave</b> the free ones, too! </p>
-    <hr class="my-4">
-    <a asp-area="Admin" asp-controller="User" asp-action="All" class="btn btn-primary btn-lg">All Users</a>
+<div class="admin-dashboard">
+    <div class="header-section text-center">
+        <h2>Welcome to the Admin Dashboard!</h2>
+        <p>
+            In the <b>Public Interface</b>, you have the power to manage the entirety of the user base,
+            <b>(Pilots, Events, Races and News Articles)</b>. Create new entries, explore existing ones, 
+            refine content through updates, remove what’s no longer needed, and seamlessly join or leave activities. 
+            Go and oversee the operations within the Formula 1 fan community.
+        </p>
+        <p>Here, you can dive into detailed insights about the users of the application.</p>
+        <p>
+            Take control, steer towards efficiency, and drive towards a seamless experience for all fans and contributors.
+        </p>
+    </div>
+
+    <div class="action-section text-center mt-5">
+        <a asp-area="Admin" asp-controller="User" asp-action="All" class="btn action-btn">
+            All Users
+        </a>
+    </div>
 </div>
+
+@section Styles {
+    <style>
+        .admin-dashboard {
+            margin: 30px auto;
+            padding: 40px;
+            width: 60%;
+            background: linear-gradient(145deg, #f0f0f0, #fafafa);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-section h2 {
+            color: #007bff; 
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .header-section p {
+            color: #333; 
+            font-size: 1.1rem;
+            line-height: 1.8; 
+            margin: 0 auto 20px; 
+            max-width: 90%; 
+        }
+
+        .action-section .action-btn {
+            padding: 12px 24px; 
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #17a2b8; 
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+            .action-section .action-btn:hover {
+                background-color: #138496; 
+                transform: translateY(-2px); 
+                text-decoration: none;
+            }
+    </style>
+}
