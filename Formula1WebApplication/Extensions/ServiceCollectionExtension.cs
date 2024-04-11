@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IPilotService, PilotService>();
             services.AddScoped<IRaceService, RaceService>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }
