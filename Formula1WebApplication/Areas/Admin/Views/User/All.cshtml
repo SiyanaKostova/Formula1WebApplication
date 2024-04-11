@@ -1,0 +1,96 @@
+﻿@model IEnumerable<UserServiceModel>
+@{
+    ViewBag.Title = "All Users";
+}
+
+<div class="users-wrapper">
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-hover custom-table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>User Is Organizer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Email</td>
+                        <td>@user.FullName</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>
+                            @if (user.IsOrganizer)
+                            {
+                                <span class="badge badge-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">No</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .users-wrapper {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .custom-table {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+            .custom-table th {
+                background-color: #007bff;
+                color: #ffffff;
+                padding: 15px;
+            }
+
+            .custom-table td {
+                padding: 10px;
+                border-color: #dee2e6;
+            }
+
+            .custom-table tr:hover {
+                background-color: #f5f5f5;
+            }
+
+        .badge-success {
+            background-color: #28a745;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .badge-danger {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        hr {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border: 0;
+            border-top: 2px solid #eee;
+        }
+    </style>
+}
