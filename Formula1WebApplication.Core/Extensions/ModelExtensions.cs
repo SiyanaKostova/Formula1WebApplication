@@ -1,5 +1,4 @@
 ﻿using Formula1WebApplication.Core.Contracts.InterfaceModels;
-using Formula1WebApplication.Infrastructure.Data.Models;
 using System.Text.RegularExpressions;
 
 namespace Formula1WebApplication.Core.Extensions
