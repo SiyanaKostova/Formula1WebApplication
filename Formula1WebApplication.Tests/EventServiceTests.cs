@@ -2,10 +2,8 @@
 using Formula1WebApplication.Core.Services;
 using Formula1WebApplication.Infrastructure.Common;
 using Formula1WebApplication.Infrastructure.Data.Models;
-using Microsoft.EntityFrameworkCore;
 using MockQueryable.Moq;
 using Moq;
-using System.Linq.Expressions;
 using Event = Formula1WebApplication.Infrastructure.Data.Models.Event;
 
 namespace Formula1WebApplication.Tests
