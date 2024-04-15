@@ -45,7 +45,7 @@ namespace Formula1WebApplication.Controllers
 
             if (information != raceDetails.GetRaceDetails())
             {
-                return BadRequest();
+                return StatusCode(500);
             }
 
             if (raceDetails == null)

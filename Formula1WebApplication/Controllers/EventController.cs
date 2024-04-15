@@ -1,11 +1,7 @@
 ﻿using Formula1WebApplication.Core.Contracts;
 using Formula1WebApplication.Core.Extensions;
 using Formula1WebApplication.Core.Models.Event;
-using Formula1WebApplication.Core.Models.NewsArticle;
-using Formula1WebApplication.Core.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using System.Security.Claims;
 
 namespace Formula1WebApplication.Controllers
@@ -59,7 +55,7 @@ namespace Formula1WebApplication.Controllers
 
             if (information != eventDetails.GetEventDetails())
             {
-                return BadRequest();
+                return StatusCode(500);
             }
 
             if (eventDetails == null)

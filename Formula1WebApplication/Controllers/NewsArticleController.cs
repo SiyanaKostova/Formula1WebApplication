@@ -43,7 +43,7 @@ namespace Formula1WebApplication.Controllers
 
             if (information != articleDetails.GetNewsArticleDetails())
             {
-                return BadRequest();
+                return StatusCode(500);
             }
 
             if (articleDetails == null)
