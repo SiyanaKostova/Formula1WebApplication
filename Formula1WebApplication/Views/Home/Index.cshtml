@@ -22,7 +22,7 @@
     </div>
 }
 
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="row">
         <div class="col-md-8">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -61,13 +61,84 @@
     </div>
 </div>
 
+<div class="container mt-4">
+    <div class="faq-section">
+        <h2 class="text-center">Frequently Asked Questions about Formula 1</h2>
+        <div class="faq-item">
+            <button class="faq-question">What is Formula1?<span class="faq-toggle">+</span></button>
+            <div class="faq-answer">
+                <p class="text-center">Formula One (commonly known as Formula 1 or F1) is a type of motorsport. 
+                    Teams compete in a series of Grand Prix races, held in different countries around the world. 
+                    Some of the most popular races are held in Monaco, Singapore, Italy and Britain. 
+                    The Formula One cars are very fast, they reach speeds of up to 351.7 km/ hour (218.5 mph). 
+                    The championship has been won by many different teams, including McLaren, Ferrari and Williams. 
+                    Teams can have as many as 600 people. The teams all come together every race weekend.
+                    There are 24 races in amazing locations across 5 continents.
+                </p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">What are the rules of Formula1 racing?<span class="faq-toggle">+</span></button>
+            <div class="faq-answer">
+                <p class="text-center">
+                    There are ten teams that compete in Formula 1 – which are either privately owned or run by car manufacturers – and they must each run two cars, so 20 drivers line-up on the grid.
+                    Each team must build their own car, within the regulations, and they are known as constructors. 
+                As well as scoring points for themselves, drivers also score points for their teams who are separately competing for the Constructors’ World Championship. 
+                Formula1 races involve two main sets of rules: technical and sporting. 
+                Technical rules govern the car's design and performance, while sporting rules pertain to the race's format, penalties, points, and other racing conditions.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">How to choose my seats for F1 race?<span class="faq-toggle">+</span></button>
+            <div class="faq-answer">
+                <p class="text-center">
+                General Admission tickets are a popular option for fans looking for cost-effective Formula 1 tickets.
+                They grant you access to the circuit and designated areas. 
+                This gives you the freedom to explore the track and decide exactly where you want to watch the race.
+                Bear in mind that you will be on your feet all day unless you bring a pop-up chair. 
+                By contrast, grandstand tickets guarantee you a designated seat all weekend. 
+                You can still roam the general admission areas, but you’ll have a seat with your name on it.
+            </p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">How are points awarded in a race?<span class="faq-toggle">+</span></button>
+            <div class="faq-answer">
+                <p class="text-center">
+                25 points for a victory, 18 for second place, 15 for third place, and then decreasing increments of 12, 10, 8, 6, 4, 2, and 1 for the remaining top-ten finishers.
+                Additionally, if a driver in the top ten achieves the fastest lap, they earn an extra point.
+                Periodically, sprint races are held during the season, offering points to the top eight finishers. 
+                The allocation in sprint races is as follows: 8 points for the winner, 7 for second place, 6 for third place, and then descending increments of 5, 4, 3, 2, and 1 for the remaining top-eight finishers.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Who are the current teams and drivers in Formula1?<span class="faq-toggle">+</span></button>
+            <div class="faq-answer">
+                <p class="text-center">
+                Red Bull (Max Verstappen - Sergio Pérez), 
+                Ferrari (Charles Leclerc - Carlos Sainz), 
+                Mercedes (Lewis Hamilton - George Russell), 
+                Alpine (Esteban Ocon - Pierre Gasly), 
+                McLaren (Lando Norris - Oscar Piastri), 
+                Stake (Valtteri Bottas - Zhou Guanyu), 
+                Aston Martin (Lance Stroll - Fernando Alonso), 
+                Haas (Kevin Magnussen - Nico Hülkenberg), 
+                RB (Yuki Tsunoda - Daniel Ricciardo), 
+                Williams (Alex Albon - Logan Sargeant), 
+            </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Styles {
     <style>
         .f1-history {
-            background-color: #f8f9fa; 
-            padding: 15px;
-            border-radius: 10px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,.1); 
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,.1);
+            margin-bottom: 20px;
         }
 
             .f1-history h2 {
@@ -103,5 +174,60 @@
         .carousel-control-next-icon {
             filter: invert(100%);
         }
+
+        .faq-section {
+            background-color: #e9ecef; 
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px; 
+        }
+
+        .faq-item {
+            display: flex;
+            justify-content: center; 
+            flex-direction: column; 
+            align-items: center; 
+            margin-bottom: 10px; 
+        }
+
+        .faq-question {
+            padding: 10px 15px;
+            margin-bottom: 10px; 
+            cursor: pointer;
+            position: relative;
+            font-size: 18px;
+            border-radius: 4px;
+        }
+
+        .faq-question:hover {
+            background-color: #f8f9fa; 
+        }
+
+        .faq-toggle {
+            font-size: 24px; 
+            font-weight: bold;
+            color: #C70039;
+            margin-left: 10px; 
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            font-size: 16px;
+            border-top: 2px solid #ccc;
+            color: #666;
+        }
     </style>
+}
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', function () {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+                this.querySelector('.faq-toggle').textContent = answer.style.display === 'none' ? '+' : '-';
+            });
+        });
+    </script>
 }
