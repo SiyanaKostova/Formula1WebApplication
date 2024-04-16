@@ -1,0 +1,81 @@
+﻿@model StatisticsServiceModel
+
+<h1 class="text-center mb-5">Site Statistics</h1>
+<hr />
+
+<img src="https://wp-statistics.com/wp-content/themes/site-theme/assets/img/cta-primary.svg" alt="Statistics" class="stats-image">
+
+<div class="statistics-container">
+    <div class="stat-box">
+        <p class="stat-number">@Model.TotalPilots</p>
+        <p class="stat-text">Total Pilots</p>
+    </div>
+    <div class="stat-box">
+        <p class="stat-number">@Model.TotalNewsArticles</p>
+        <p class="stat-text">Total News Articles</p>
+    </div>
+    <div class="stat-box">
+        <p class="stat-number">@Model.TotalEvents</p>
+        <p class="stat-text">Total Events</p>
+    </div>
+    <div class="stat-box">
+        <p class="stat-number">@Model.TotalRaces</p>
+        <p class="stat-text">Total Races</p>
+    </div>
+    <div class="stat-box">
+        <p class="stat-number">@Model.TotalOrganizers</p>
+        <p class="stat-text">Total Organizers</p>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .mb-5 {
+            margin-bottom: 1rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+        .stats-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto 30px; 
+        }
+
+        .statistics-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            width: 180px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .stat-box:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .stat-text {
+            font-size: 18px;
+            color: #212529;
+        }
+    </style>
+}
