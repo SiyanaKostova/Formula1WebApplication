@@ -11,5 +11,9 @@
 		public const string PhoneExistsMessage = "Phone number already exists. Enter another one";
 
 		public const string AlreadyOrganizerMessage = "You are already an organizer.";
-	}
+
+        public const string UserMessageSuccess = "UserMessageSuccess";
+
+        public const string UserMessageError = "UserMessageError";
+    }
 }
