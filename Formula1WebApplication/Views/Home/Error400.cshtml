@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "400 Error - Bad Request";
+}
+
+<div style="text-align: center; margin-top: 50px;">
+    <img src="https://www.techquintal.com/wp-content/uploads/2022/08/400-Bad-Request-Error.jpg"
+         alt="400 Error - Bad Request"
+         style="max-width: 35%; height: auto; margin-bottom: 30px;">
+
+    <h1 class="text-danger">400 Error</h1>
+    <h2>Uh-oh! Something went wrong with your request.</h2>
+    <p>It's possible the server could not understand the request due to invalid syntax.</p>
+    <br />
+    <p>
+        <a href="@Url.Action("Index", "Home")"
+           style="display: inline-block; text-decoration: none; color: white; background-color: #007bff; padding: 10px 20px; border-radius: 5px; transition: background-color 0.2s;">
+            Return to the homepage
+        </a>
+    </p>
+</div>
