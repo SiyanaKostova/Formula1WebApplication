@@ -100,7 +100,7 @@ namespace Formula1WebApplication.Controllers
             if (await eventService.HasOrganizerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
             var model = await eventService.GetEventServiceModelByIdAsync(id);
@@ -114,7 +114,7 @@ namespace Formula1WebApplication.Controllers
             if (await eventService.HasOrganizerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
             if (ModelState.IsValid == false)
@@ -185,7 +185,7 @@ namespace Formula1WebApplication.Controllers
 
             if (!success)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
             return RedirectToAction(nameof(Mine)); 

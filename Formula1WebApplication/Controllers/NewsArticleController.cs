@@ -88,7 +88,7 @@ namespace Formula1WebApplication.Controllers
             if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false
                 && User.IsAdmin() == false)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
             var model = await newsArticleService.GetNewsArticleServiceModelByIdAsync(id);
@@ -102,7 +102,7 @@ namespace Formula1WebApplication.Controllers
             if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
             if (ModelState.IsValid == false)

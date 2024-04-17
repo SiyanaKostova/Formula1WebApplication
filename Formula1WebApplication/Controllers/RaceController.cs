@@ -90,7 +90,7 @@ namespace Formula1WebApplication.Controllers
             if (await raceService.HasOrganizerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
             var model = await raceService.GetRaceServiceModelByIdAsync(id);
@@ -104,7 +104,7 @@ namespace Formula1WebApplication.Controllers
             if (await raceService.HasOrganizerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
 
