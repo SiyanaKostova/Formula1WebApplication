@@ -91,6 +91,8 @@ namespace Formula1WebApplication.Controllers
             if (await newsArticleService.HasOrganizerWithIdAsync(id, User.Id()) == false
                 && User.IsAdmin() == false)
             {
+                TempData[UserMessageError] = "You were not able to edit this News Article!";
+
                 return BadRequest();
             }
 

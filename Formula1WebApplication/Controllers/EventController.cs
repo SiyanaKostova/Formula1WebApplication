@@ -103,6 +103,8 @@ namespace Formula1WebApplication.Controllers
             if (await eventService.HasOrganizerWithIdAsync(id, User.Id()) == false
 				&& User.IsAdmin() == false)
             {
+                TempData[UserMessageError] = "You were not able to edit this Event!";
+
                 return BadRequest();
             }
 
