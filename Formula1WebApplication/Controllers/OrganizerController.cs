@@ -49,6 +49,7 @@ namespace Formula1WebApplication.Controllers
 
             if (success)
             {
+                TempData[UserMessageSuccess] = "You have successfully become an Organizer!";
                 return RedirectToAction(nameof(NewsArticleController.All), "NewsArticle");
             }
 

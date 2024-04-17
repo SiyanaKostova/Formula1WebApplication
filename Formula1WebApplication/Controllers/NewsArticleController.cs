@@ -4,6 +4,7 @@ using Formula1WebApplication.Core.Models.NewsArticle;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Formula1WebApplication.Core.Constants.MessageConstants;
 
 namespace Formula1WebApplication.Controllers
 {
@@ -79,6 +80,8 @@ namespace Formula1WebApplication.Controllers
 
             await newsArticleService.AddAsync(model, organizerId.Value);
 
+            TempData[UserMessageSuccess] = "You have added the News Article successfully!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -111,6 +114,8 @@ namespace Formula1WebApplication.Controllers
             }
 
             await newsArticleService.EditAsync(id, model);
+
+            TempData[UserMessageSuccess] = "You have successfully edited the News Article!";
 
             return RedirectToAction(nameof(Details), new {id, information = model.GetNewsArticleDetails() });
         }
@@ -147,6 +152,8 @@ namespace Formula1WebApplication.Controllers
             }
 
             await newsArticleService.DeleteAsync(model.Id);
+
+            TempData[UserMessageSuccess] = "You have successfully deleted the News Article!";
 
             return RedirectToAction(nameof(All));
         }

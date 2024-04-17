@@ -3,6 +3,7 @@ using Formula1WebApplication.Core.Extensions;
 using Formula1WebApplication.Core.Models.Event;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Formula1WebApplication.Core.Constants.MessageConstants;
 
 namespace Formula1WebApplication.Controllers
 {
@@ -91,6 +92,8 @@ namespace Formula1WebApplication.Controllers
 
             await eventService.AddAsync(model, organizerId.Value);
 
+            TempData[UserMessageSuccess] = "You have successfully added an Event!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -123,6 +126,8 @@ namespace Formula1WebApplication.Controllers
             }
 
             await eventService.EditAsync(id, model);
+
+            TempData[UserMessageSuccess] = "You have successfully edited the Event!";
 
             return RedirectToAction(nameof(Details), new { id, information = model.GetEventDetails() });
         }
@@ -162,6 +167,8 @@ namespace Formula1WebApplication.Controllers
 
             await eventService.DeleteAsync(model.Id);
 
+            TempData[UserMessageSuccess] = "You have deleted the Event successfully!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -175,6 +182,8 @@ namespace Formula1WebApplication.Controllers
                 return BadRequest();
             }
 
+            TempData[UserMessageSuccess] = "You have joined the Event successfully!";
+
             return RedirectToAction(nameof(Mine));
         }
 
@@ -187,6 +196,8 @@ namespace Formula1WebApplication.Controllers
             {
                 return NotFound();
             }
+
+            TempData[UserMessageSuccess] = "You have left the Event successfully!";
 
             return RedirectToAction(nameof(Mine)); 
         }

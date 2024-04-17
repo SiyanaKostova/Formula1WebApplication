@@ -3,6 +3,7 @@ using Formula1WebApplication.Core.Extensions;
 using Formula1WebApplication.Core.Models.Race;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Formula1WebApplication.Core.Constants.MessageConstants;
 
 namespace Formula1WebApplication.Controllers
 {
@@ -81,6 +82,8 @@ namespace Formula1WebApplication.Controllers
 
             await raceService.AddAsync(model, organizerId.Value);
 
+            TempData[UserMessageSuccess] = "You have successfully added a Race!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -114,6 +117,8 @@ namespace Formula1WebApplication.Controllers
             }
 
             await raceService.EditAsync(id, model);
+
+            TempData[UserMessageSuccess] = "You have successfully edited the Race!";
 
             return RedirectToAction(nameof(Details), new { id, information = model.GetRaceDetails() });
         }
@@ -153,6 +158,8 @@ namespace Formula1WebApplication.Controllers
             }
 
             await raceService.DeleteAsync(model.Id);
+
+            TempData[UserMessageSuccess] = "You have successfully deleted the Race!";
 
             return RedirectToAction(nameof(All));
         }
